@@ -80,3 +80,40 @@ func newTemplatesDataQT(n int) *templates.MarshalData {
 		Rows: rows,
 	}
 }
+
+func BenchmarkQuickTemplate1(b *testing.B) {
+	benchmarkQuickTemplate(b, 1)
+}
+
+func BenchmarkQuickTemplate10(b *testing.B) {
+	benchmarkQuickTemplate(b, 10)
+}
+
+func BenchmarkQuickTemplate100(b *testing.B) {
+	benchmarkQuickTemplate(b, 100)
+}
+
+func benchmarkQuickTemplate(b *testing.B, rowsCount int) {
+	b.ReportAllocs()
+	rows := getBenchRowsQT(rowsCount)
+	b.RunParallel(func(pb *testing.PB) {
+		bb := quicktemplate.AcquireByteBuffer()
+		for pb.Next() {
+			templates.WriteBenchPage(bb, rows)
+			bb.Reset()
+		}
+		quicktemplate.ReleaseByteBuffer(bb)
+	})
+}
+
+func getBenchRowsQT(n int) []templates.BenchRow {
+	rows := make([]templates.BenchRow, n)
+	for i := 0; i < n; i++ {
+		rows[i] = templates.BenchRow{
+			ID:      i,
+			Message: fmt.Sprintf("message %d", i),
+			Print:   ((i & 1) == 0),
+		}
+	}
+	return rows
+}

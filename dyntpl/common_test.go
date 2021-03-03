@@ -4,9 +4,29 @@ import (
 	"bytes"
 	"encoding/json"
 	"encoding/xml"
+	"html/template"
 	"log"
+	texttemplate "text/template"
 
 	"github.com/valyala/quicktemplate"
+	"github.com/valyala/quicktemplate/testdata/templates"
+)
+
+var (
+	tpl         = template.Must(template.ParseFiles("tpl/bench.tpl"))
+	textTpl     = texttemplate.Must(texttemplate.ParseFiles("tpl/bench.tpl"))
+	tplTemplate = []byte(`<html>
+	<head><title>test</title></head>
+	<body>
+		<ul>
+		{% for _, row := range bench.Rows %}
+			{% if row.Print == true %}
+				<li>ID={%= row.ID %}, Message={%h= row.Message %}</li>
+			{% endif %}
+		{% endfor %}
+		</ul>
+	</body>
+</html>`)
 )
 
 func init() {
@@ -56,4 +76,19 @@ func init() {
 	}
 
 	quicktemplate.ReleaseByteBuffer(bb)
+
+	// make sure that both template engines generate the same result
+	rows := getBenchRowsQT(3)
+
+	bb1 := &quicktemplate.ByteBuffer{}
+	if err := tpl.Execute(bb1, rows); err != nil {
+		log.Fatalf("unexpected error: %s", err)
+	}
+
+	bb2 := &quicktemplate.ByteBuffer{}
+	templates.WriteBenchPage(bb2, rows)
+
+	if !bytes.Equal(bb1.B, bb2.B) {
+		log.Fatalf("results mismatch:\n%q\n%q", bb1, bb2)
+	}
 }
