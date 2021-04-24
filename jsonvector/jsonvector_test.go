@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/koykov/jsonvector"
+	"github.com/koykov/vector"
 )
 
 func TestParseJsonvector(t *testing.T) {
@@ -48,8 +49,8 @@ func benchmarkJsonvectorParse(b *testing.B, s string) {
 				panic(fmt.Errorf("unexpected error: %s", err))
 			}
 			v := p.Get()
-			if v.Type() != jsonvector.TypeObj {
-				panic(fmt.Errorf("unexpected value type; got %d; want %d", v.Type(), jsonvector.TypeObj))
+			if v.Type() != vector.TypeObj {
+				panic(fmt.Errorf("unexpected value type; got %d; want %d", v.Type(), vector.TypeObj))
 			}
 			p.Reset()
 		}
