@@ -15,28 +15,28 @@ func BenchmarkParseUrlvector(b *testing.B) {
 			b.Error(err)
 		}
 
-		if vec.SchemeString() != "http" {
-			reportErr(b, "scheme", "http", vec.SchemeString())
+		if vec.SchemeString() != url0scheme {
+			reportErr(b, "scheme", url0scheme, vec.SchemeString())
 		}
-		if vec.UsernameString() != "user" {
-			reportErr(b, "username", "user", vec.UsernameString())
+		if vec.UsernameString() != url0user {
+			reportErr(b, "username", url0user, vec.UsernameString())
 		}
-		if vec.PasswordString() != "pass" {
-			reportErr(b, "password", "pass", vec.PasswordString())
+		if vec.PasswordString() != url0pass {
+			reportErr(b, "password", url0pass, vec.PasswordString())
 		}
-		if vec.HostString() != "[1080:0:0:0:8:800:200C:417A]:61616" {
-			reportErr(b, "host", "[1080:0:0:0:8:800:200C:417A]:61616", vec.HostString())
+		if vec.HostString() != url0host {
+			reportErr(b, "host", url0host, vec.HostString())
 		}
-		if vec.PathString() != "/foo" {
-			reportErr(b, "path", "/foo", vec.PathString())
+		if vec.PathString() != url0path {
+			reportErr(b, "path", url0path, vec.PathString())
 		}
-		if vec.HashString() != "#foobar" {
-			reportErr(b, "hash", "#foobar", vec.HashString())
+		if vec.HashString() != url0hash {
+			reportErr(b, "hash", url0hash, vec.HashString())
 		}
-		if vec.Query().Get("page").String() != "https://ultra-software-base.ru/system/google-chrome.html?yclid=212247430717539672" {
+		if vec.Query().Get("page").String() != url0qPage {
 			b.Error("query[page] mismatch")
 		}
-		if vec.Query().Get("ua").String() != "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.105 YaBrowser/21.3.3.230 Yowser/2.5 Safari/537.36" {
+		if vec.Query().Get("ua").String() != url0qUa {
 			b.Error("query[ua] mismatch")
 		}
 
