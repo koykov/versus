@@ -7,7 +7,7 @@ import (
 	"github.com/koykov/fastconv"
 )
 
-func BenchmarkParseUrl(b *testing.B) {
+func BenchmarkNetUrl_ParseUrl(b *testing.B) {
 	b.ReportAllocs()
 	for i := 0; i < b.N; i++ {
 		u, err := url.Parse(fastconv.B2S(url0))
@@ -33,6 +33,16 @@ func BenchmarkParseUrl(b *testing.B) {
 		if u.Fragment != url0fragment {
 			reportErr(b, "hash", url0fragment, u.Fragment)
 		}
+	}
+}
+
+func BenchmarkNetUrl_ParseQuery(b *testing.B) {
+	b.ReportAllocs()
+	for i := 0; i < b.N; i++ {
+		u, err := url.Parse(fastconv.B2S(url0))
+		if err != nil {
+			b.Error(err)
+		}
 
 		q, err := url.ParseQuery(u.RawQuery)
 		if err != nil {
@@ -43,6 +53,50 @@ func BenchmarkParseUrl(b *testing.B) {
 		}
 		if q["ua"][0] != url0qUa {
 			b.Error("query[ua] mismatch")
+		}
+		if q["uid"][0] != url0qUid {
+			b.Error("query[uid] mismatch")
+		}
+		if q["ip"][0] != url0qIp {
+			b.Error("query[ip] mismatch")
+		}
+	}
+}
+
+func BenchmarkNetUrl_ModHost(b *testing.B) {
+	b.ReportAllocs()
+	for i := 0; i < b.N; i++ {
+		u, err := url.Parse(fastconv.B2S(url0))
+		if err != nil {
+			b.Error(err)
+		}
+
+		u.Host = "x.com:3333"
+		if u.String() != url0modHost {
+			b.Error("mod host mismatch")
+		}
+	}
+}
+
+func BenchmarkNetUrl_ModQuery(b *testing.B) {
+	b.ReportAllocs()
+	for i := 0; i < b.N; i++ {
+		u, err := url.Parse(fastconv.B2S(url0))
+		if err != nil {
+			b.Error(err)
+		}
+
+		q, err := url.ParseQuery(u.RawQuery)
+		if err != nil {
+			b.Error(err)
+		}
+		if q["ip"][0] != url0qIp {
+			b.Error("mod query old ip mismatch")
+		}
+
+		q, err = url.ParseQuery(url0newQuery)
+		if q["ip"][0] != url0qIp1 {
+			b.Error("mod query new ip mismatch")
 		}
 	}
 }
