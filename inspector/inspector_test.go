@@ -127,3 +127,8 @@ func BenchmarkInspectorCmp(b *testing.B) {
 		}
 	})
 }
+
+// todo implement me
+// func BenchmarkInspectorSet(b *testing.B) {
+// 	// ...
+// }

@@ -66,3 +66,8 @@ func BenchmarkReflect2Cmp(b *testing.B) {
 		}
 	})
 }
+
+// todo implement me
+// func BenchmarkReflect2Set(b *testing.B) {
+// 	// ...
+// }
