@@ -6,15 +6,15 @@ import (
 	"encoding/xml"
 	"html/template"
 	"log"
-	texttemplate "text/template"
+	tt "text/template"
 
-	"github.com/valyala/quicktemplate"
-	"github.com/valyala/quicktemplate/testdata/templates"
+	qt "github.com/valyala/quicktemplate"
+	qtt "github.com/valyala/quicktemplate/testdata/templates"
 )
 
 var (
 	tpl         = template.Must(template.ParseFiles("tpl/bench.tpl"))
-	textTpl     = texttemplate.Must(texttemplate.ParseFiles("tpl/bench.tpl"))
+	textTpl     = tt.Must(tt.ParseFiles("tpl/bench.tpl"))
 	tplTemplate = []byte(`<html>
 	<head><title>test</title></head>
 	<body>
@@ -32,7 +32,8 @@ var (
 func init() {
 	// Make sure both encoding/json and templates generate identical output.
 	d := newTemplatesDataQT(3)
-	bb := quicktemplate.AcquireByteBuffer()
+	bb := qt.AcquireByteBuffer()
+	defer qt.ReleaseByteBuffer(bb)
 
 	expectedData, err := json.Marshal(d)
 	if err != nil {
@@ -75,18 +76,18 @@ func init() {
 		log.Fatalf("unexpected data generated with quicktemplate:\n%q\n. Expecting\n%q\n", bb.B, expectedData)
 	}
 
-	quicktemplate.ReleaseByteBuffer(bb)
-
 	// make sure that both template engines generate the same result
 	rows := getBenchRowsQT(3)
 
-	bb1 := &quicktemplate.ByteBuffer{}
+	bb1 := qt.AcquireByteBuffer()
+	defer qt.ReleaseByteBuffer(bb1)
 	if err := tpl.Execute(bb1, rows); err != nil {
 		log.Fatalf("unexpected error: %s", err)
 	}
 
-	bb2 := &quicktemplate.ByteBuffer{}
-	templates.WriteBenchPage(bb2, rows)
+	bb2 := qt.AcquireByteBuffer()
+	defer qt.ReleaseByteBuffer(bb2)
+	qtt.WriteBenchPage(bb2, rows)
 
 	if !bytes.Equal(bb1.B, bb2.B) {
 		log.Fatalf("results mismatch:\n%q\n%q", bb1, bb2)

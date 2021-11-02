@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/valyala/quicktemplate"
-	"github.com/valyala/quicktemplate/testdata/templates"
+	qt "github.com/valyala/quicktemplate"
+	qtt "github.com/valyala/quicktemplate/testdata/templates"
 )
 
 func BenchmarkMarshalJSONQuickTemplate1(b *testing.B) {
@@ -28,12 +28,12 @@ func benchmarkMarshalJSONQuickTemplate(b *testing.B, n int) {
 	b.ReportAllocs()
 	d := newTemplatesDataQT(n)
 	b.RunParallel(func(pb *testing.PB) {
-		bb := quicktemplate.AcquireByteBuffer()
+		bb := qt.AcquireByteBuffer()
 		for pb.Next() {
 			d.WriteJSON(bb)
 			bb.Reset()
 		}
-		quicktemplate.ReleaseByteBuffer(bb)
+		qt.ReleaseByteBuffer(bb)
 	})
 }
 
@@ -57,24 +57,24 @@ func benchmarkMarshalXMLQuickTemplate(b *testing.B, n int) {
 	b.ReportAllocs()
 	d := newTemplatesDataQT(n)
 	b.RunParallel(func(pb *testing.PB) {
-		bb := quicktemplate.AcquireByteBuffer()
+		bb := qt.AcquireByteBuffer()
 		for pb.Next() {
 			d.WriteXML(bb)
 			bb.Reset()
 		}
-		quicktemplate.ReleaseByteBuffer(bb)
+		qt.ReleaseByteBuffer(bb)
 	})
 }
 
-func newTemplatesDataQT(n int) *templates.MarshalData {
-	var rows []templates.MarshalRow
+func newTemplatesDataQT(n int) *qtt.MarshalData {
+	var rows []qtt.MarshalRow
 	for i := 0; i < n; i++ {
-		rows = append(rows, templates.MarshalRow{
+		rows = append(rows, qtt.MarshalRow{
 			Msg: fmt.Sprintf("тест %d", i),
 			N:   i,
 		})
 	}
-	return &templates.MarshalData{
+	return &qtt.MarshalData{
 		Foo:  1,
 		Bar:  "foobar",
 		Rows: rows,
@@ -97,19 +97,19 @@ func benchmarkQuickTemplate(b *testing.B, rowsCount int) {
 	b.ReportAllocs()
 	rows := getBenchRowsQT(rowsCount)
 	b.RunParallel(func(pb *testing.PB) {
-		bb := quicktemplate.AcquireByteBuffer()
+		bb := qt.AcquireByteBuffer()
 		for pb.Next() {
-			templates.WriteBenchPage(bb, rows)
+			qtt.WriteBenchPage(bb, rows)
 			bb.Reset()
 		}
-		quicktemplate.ReleaseByteBuffer(bb)
+		qt.ReleaseByteBuffer(bb)
 	})
 }
 
-func getBenchRowsQT(n int) []templates.BenchRow {
-	rows := make([]templates.BenchRow, n)
+func getBenchRowsQT(n int) []qtt.BenchRow {
+	rows := make([]qtt.BenchRow, n)
 	for i := 0; i < n; i++ {
-		rows[i] = templates.BenchRow{
+		rows[i] = qtt.BenchRow{
 			ID:      i,
 			Message: fmt.Sprintf("message %d", i),
 			Print:   ((i & 1) == 0),
