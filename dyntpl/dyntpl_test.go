@@ -36,75 +36,80 @@ var (
 </MarshalData>`)
 )
 
-func benchmarkMarshalJSONDyntpl(b *testing.B, n int) {
-	treeJSON, _ := dyntpl.Parse(tplMarshalJSON, false)
-	treeXML, _ := dyntpl.Parse(tplMarshalXML, false)
-	dyntpl.RegisterTpl(0, "tplMarshalJSON", treeJSON)
-	dyntpl.RegisterTpl(0, "tplMarshalXML", treeXML)
+func BenchmarkMarshalJSONDyntpl(b *testing.B) {
+	bench := func(b *testing.B, n int) {
+		treeJSON, _ := dyntpl.Parse(tplMarshalJSON, false)
+		treeXML, _ := dyntpl.Parse(tplMarshalXML, false)
+		dyntpl.RegisterTpl(0, "tplMarshalJSON", treeJSON)
+		dyntpl.RegisterTpl(0, "tplMarshalXML", treeXML)
 
-	b.ResetTimer()
-	b.ReportAllocs()
+		b.ResetTimer()
+		b.ReportAllocs()
 
-	d := newTemplatesDataDT(n)
-	b.RunParallel(func(pb *testing.PB) {
-		buf := cbytebuf.LBAcquire()
-		ctx := dyntpl.AcquireCtx()
-		ctx.Set("d", d, &testobj_ins.MarshalDataInspector{})
-		for pb.Next() {
-			_ = dyntpl.Write(buf, "tplMarshalJSON", ctx)
-		}
-		dyntpl.ReleaseCtx(ctx)
-		cbytebuf.LBRelease(buf)
-	})
+		d := newTemplatesDataDT(n)
+		b.RunParallel(func(pb *testing.PB) {
+			buf := cbytebuf.LBAcquire()
+			ctx := dyntpl.AcquireCtx()
+			ctx.Set("d", d, &testobj_ins.MarshalDataInspector{})
+			for pb.Next() {
+				_ = dyntpl.Write(buf, "tplMarshalJSON", ctx)
+			}
+			dyntpl.ReleaseCtx(ctx)
+			cbytebuf.LBRelease(buf)
+		})
+	}
+	b.Run("1", func(b *testing.B) { bench(b, 1) })
+	b.Run("10", func(b *testing.B) { bench(b, 10) })
+	b.Run("100", func(b *testing.B) { bench(b, 100) })
+	b.Run("1000", func(b *testing.B) { bench(b, 1000) })
 }
 
-func BenchmarkMarshalJSONDyntpl1(b *testing.B) {
-	benchmarkMarshalJSONDyntpl(b, 1)
+func BenchmarkMarshalXMLDyntpl(b *testing.B) {
+	bench := func(b *testing.B, n int) {
+		b.ResetTimer()
+		b.ReportAllocs()
+
+		d := newTemplatesDataDT(n)
+		b.RunParallel(func(pb *testing.PB) {
+			buf := cbytebuf.LBAcquire()
+			ctx := dyntpl.AcquireCtx()
+			ctx.Set("d", d, &testobj_ins.MarshalDataInspector{})
+			for pb.Next() {
+				_ = dyntpl.Write(buf, "tplMarshalXML", ctx)
+			}
+			dyntpl.ReleaseCtx(ctx)
+			cbytebuf.LBRelease(buf)
+		})
+	}
+	b.Run("1", func(b *testing.B) { bench(b, 1) })
+	b.Run("10", func(b *testing.B) { bench(b, 10) })
+	b.Run("100", func(b *testing.B) { bench(b, 100) })
+	b.Run("1000", func(b *testing.B) { bench(b, 1000) })
 }
 
-func BenchmarkMarshalJSONDyntpl10(b *testing.B) {
-	benchmarkMarshalJSONDyntpl(b, 10)
-}
+func BenchmarkDyntpl(b *testing.B) {
+	bench := func(b *testing.B, n int) {
+		tree, _ := dyntpl.Parse(tplTemplate, false)
+		dyntpl.RegisterTpl(0, "tplTemplate", tree)
 
-func BenchmarkMarshalJSONDyntpl100(b *testing.B) {
-	benchmarkMarshalJSONDyntpl(b, 100)
-}
+		b.ResetTimer()
+		b.ReportAllocs()
 
-func BenchmarkMarshalJSONDyntpl1000(b *testing.B) {
-	benchmarkMarshalJSONDyntpl(b, 1000)
-}
-
-func benchmarkMarshalXMLDyntpl(b *testing.B, n int) {
-	b.ResetTimer()
-	b.ReportAllocs()
-
-	d := newTemplatesDataDT(n)
-	b.RunParallel(func(pb *testing.PB) {
-		buf := cbytebuf.LBAcquire()
-		ctx := dyntpl.AcquireCtx()
-		ctx.Set("d", d, &testobj_ins.MarshalDataInspector{})
-		for pb.Next() {
-			_ = dyntpl.Write(buf, "tplMarshalXML", ctx)
-		}
-		dyntpl.ReleaseCtx(ctx)
-		cbytebuf.LBRelease(buf)
-	})
-}
-
-func BenchmarkMarshalXMLDyntpl1(b *testing.B) {
-	benchmarkMarshalXMLDyntpl(b, 1)
-}
-
-func BenchmarkMarshalXMLDyntpl10(b *testing.B) {
-	benchmarkMarshalXMLDyntpl(b, 10)
-}
-
-func BenchmarkMarshalXMLDyntpl100(b *testing.B) {
-	benchmarkMarshalXMLDyntpl(b, 100)
-}
-
-func BenchmarkMarshalXMLDyntpl1000(b *testing.B) {
-	benchmarkMarshalXMLDyntpl(b, 1000)
+		bench := getBenchRowsDT(n)
+		b.RunParallel(func(pb *testing.PB) {
+			buf := cbytebuf.LBAcquire()
+			ctx := dyntpl.AcquireCtx()
+			ctx.Set("bench", bench, &testobj_ins.BenchRowsInspector{})
+			for pb.Next() {
+				_ = dyntpl.Write(buf, "tplTemplate", ctx)
+			}
+			dyntpl.ReleaseCtx(ctx)
+			cbytebuf.LBRelease(buf)
+		})
+	}
+	b.Run("1", func(b *testing.B) { bench(b, 1) })
+	b.Run("10", func(b *testing.B) { bench(b, 10) })
+	b.Run("100", func(b *testing.B) { bench(b, 100) })
 }
 
 func newTemplatesDataDT(n int) *testobj.MarshalData {
@@ -120,38 +125,6 @@ func newTemplatesDataDT(n int) *testobj.MarshalData {
 		Bar:  "foobar",
 		Rows: rows,
 	}
-}
-
-func BenchmarkDyntpl1(b *testing.B) {
-	benchmarkDyntpl(b, 1)
-}
-
-func BenchmarkDyntpl10(b *testing.B) {
-	benchmarkDyntpl(b, 10)
-}
-
-func BenchmarkDyntpl100(b *testing.B) {
-	benchmarkDyntpl(b, 100)
-}
-
-func benchmarkDyntpl(b *testing.B, rowsCount int) {
-	tree, _ := dyntpl.Parse(tplTemplate, false)
-	dyntpl.RegisterTpl(0, "tplTemplate", tree)
-
-	b.ResetTimer()
-	b.ReportAllocs()
-
-	bench := getBenchRowsDT(rowsCount)
-	b.RunParallel(func(pb *testing.PB) {
-		buf := cbytebuf.LBAcquire()
-		ctx := dyntpl.AcquireCtx()
-		ctx.Set("bench", bench, &testobj_ins.BenchRowsInspector{})
-		for pb.Next() {
-			_ = dyntpl.Write(buf, "tplTemplate", ctx)
-		}
-		dyntpl.ReleaseCtx(ctx)
-		cbytebuf.LBRelease(buf)
-	})
 }
 
 func getBenchRowsDT(n int) *testobj.BenchRows {
