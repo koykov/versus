@@ -39,8 +39,8 @@ var (
 func benchmarkMarshalJSONDyntpl(b *testing.B, n int) {
 	treeJSON, _ := dyntpl.Parse(tplMarshalJSON, false)
 	treeXML, _ := dyntpl.Parse(tplMarshalXML, false)
-	dyntpl.RegisterTpl("tplMarshalJSON", treeJSON)
-	dyntpl.RegisterTpl("tplMarshalXML", treeXML)
+	dyntpl.RegisterTpl(0, "tplMarshalJSON", treeJSON)
+	dyntpl.RegisterTpl(0, "tplMarshalXML", treeXML)
 
 	b.ResetTimer()
 	b.ReportAllocs()
@@ -51,7 +51,7 @@ func benchmarkMarshalJSONDyntpl(b *testing.B, n int) {
 		ctx := dyntpl.AcquireCtx()
 		ctx.Set("d", d, &testobj_ins.MarshalDataInspector{})
 		for pb.Next() {
-			_ = dyntpl.RenderTo(buf, "tplMarshalJSON", ctx)
+			_ = dyntpl.Write(buf, "tplMarshalJSON", ctx)
 		}
 		dyntpl.ReleaseCtx(ctx)
 		cbytebuf.LBRelease(buf)
@@ -84,7 +84,7 @@ func benchmarkMarshalXMLDyntpl(b *testing.B, n int) {
 		ctx := dyntpl.AcquireCtx()
 		ctx.Set("d", d, &testobj_ins.MarshalDataInspector{})
 		for pb.Next() {
-			_ = dyntpl.RenderTo(buf, "tplMarshalXML", ctx)
+			_ = dyntpl.Write(buf, "tplMarshalXML", ctx)
 		}
 		dyntpl.ReleaseCtx(ctx)
 		cbytebuf.LBRelease(buf)
@@ -136,7 +136,7 @@ func BenchmarkDyntpl100(b *testing.B) {
 
 func benchmarkDyntpl(b *testing.B, rowsCount int) {
 	tree, _ := dyntpl.Parse(tplTemplate, false)
-	dyntpl.RegisterTpl("tplTemplate", tree)
+	dyntpl.RegisterTpl(0, "tplTemplate", tree)
 
 	b.ResetTimer()
 	b.ReportAllocs()
@@ -147,7 +147,7 @@ func benchmarkDyntpl(b *testing.B, rowsCount int) {
 		ctx := dyntpl.AcquireCtx()
 		ctx.Set("bench", bench, &testobj_ins.BenchRowsInspector{})
 		for pb.Next() {
-			_ = dyntpl.RenderTo(buf, "tplTemplate", ctx)
+			_ = dyntpl.Write(buf, "tplTemplate", ctx)
 		}
 		dyntpl.ReleaseCtx(ctx)
 		cbytebuf.LBRelease(buf)
