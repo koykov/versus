@@ -7,31 +7,32 @@ import (
 	"testing"
 )
 
-func BenchmarkByteBufferNative_Write(b *testing.B) {
-	b.ReportAllocs()
-	for i := 0; i < b.N; i++ {
-		var buf bytes.Buffer
-		for _, part := range parts {
-			buf.Write(part)
-			buf.WriteByte(' ')
+func BenchmarkByteBuffer(b *testing.B) {
+	b.Run("write", func(b *testing.B) {
+		b.ReportAllocs()
+		for i := 0; i < b.N; i++ {
+			var buf bytes.Buffer
+			for _, part := range parts {
+				buf.Write(part)
+				buf.WriteByte(' ')
+			}
+			if !bytes.Equal(buf.Bytes(), expected) {
+				b.Error("not equal")
+			}
+			buf.Reset()
 		}
-		if !bytes.Equal(buf.Bytes(), expected) {
-			b.Error("not equal")
+	})
+	b.Run("write long", func(b *testing.B) {
+		b.ReportAllocs()
+		for i := 0; i < b.N; i++ {
+			var buf bytes.Buffer
+			for i := 0; i < 1000; i++ {
+				buf.Write(source)
+			}
+			if !bytes.Equal(buf.Bytes(), expectedLong) {
+				b.Error("not equal")
+			}
+			buf.Reset()
 		}
-		buf.Reset()
-	}
-}
-
-func BenchmarkByteBufferNative_WriteLong(b *testing.B) {
-	b.ReportAllocs()
-	for i := 0; i < b.N; i++ {
-		var buf bytes.Buffer
-		for i := 0; i < 1000; i++ {
-			buf.Write(source)
-		}
-		if !bytes.Equal(buf.Bytes(), expectedLong) {
-			b.Error("not equal")
-		}
-		buf.Reset()
-	}
+	})
 }

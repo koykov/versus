@@ -9,31 +9,32 @@ import (
 	"github.com/valyala/bytebufferpool"
 )
 
-func BenchmarkByteBufferPool_Write(b *testing.B) {
-	b.ReportAllocs()
-	for i := 0; i < b.N; i++ {
-		buf := bytebufferpool.Get()
-		for _, part := range parts {
-			_, _ = buf.Write(part)
-			_, _ = buf.Write(space)
+func BenchmarkByteBufferPool(b *testing.B) {
+	b.Run("write", func(b *testing.B) {
+		b.ReportAllocs()
+		for i := 0; i < b.N; i++ {
+			buf := bytebufferpool.Get()
+			for _, part := range parts {
+				_, _ = buf.Write(part)
+				_, _ = buf.Write(space)
+			}
+			if !bytes.Equal(buf.Bytes(), expected) {
+				b.Error("not equal")
+			}
+			bytebufferpool.Put(buf)
 		}
-		if !bytes.Equal(buf.Bytes(), expected) {
-			b.Error("not equal")
+	})
+	b.Run("write long", func(b *testing.B) {
+		b.ReportAllocs()
+		for i := 0; i < b.N; i++ {
+			buf := bytebufferpool.Get()
+			for i := 0; i < 1000; i++ {
+				_, _ = buf.Write(source)
+			}
+			if !bytes.Equal(buf.Bytes(), expectedLong) {
+				b.Error("not equal")
+			}
+			bytebufferpool.Put(buf)
 		}
-		bytebufferpool.Put(buf)
-	}
-}
-
-func BenchmarkByteBufferPool_WriteLong(b *testing.B) {
-	b.ReportAllocs()
-	for i := 0; i < b.N; i++ {
-		buf := bytebufferpool.Get()
-		for i := 0; i < 1000; i++ {
-			_, _ = buf.Write(source)
-		}
-		if !bytes.Equal(buf.Bytes(), expectedLong) {
-			b.Error("not equal")
-		}
-		bytebufferpool.Put(buf)
-	}
+	})
 }
