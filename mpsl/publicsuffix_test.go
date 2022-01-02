@@ -16,6 +16,7 @@ func BenchmarkPublicSuffix(b *testing.B) {
 	}
 
 	b.ReportAllocs()
+	b.ResetTimer()
 	for _, s := range stages {
 		b.Run(s.hostname, func(b *testing.B) {
 			b.ReportAllocs()
