@@ -5,14 +5,15 @@ import (
 	"io"
 	"log"
 	"os"
+	"testing"
 )
 
-type stageLP struct {
+type stageLD struct {
 	lang, text string
 }
 
 var (
-	stagesLPHW = []stageLP{
+	stagesLDHW = []stageLD{
 		{lang: "Afrikaans", text: "Hello Wêreld!"},
 		{lang: "Albanian", text: "Përshendetje Botë!"},
 		{lang: "Amharic", text: "ሰላም ልዑል!"},
@@ -88,7 +89,7 @@ var (
 		{lang: "Yoruba", text: "Mo ki O Ile Aiye!"},
 		{lang: "Zulu", text: "Sawubona Mhlaba!"},
 	}
-	stageLPDS = make([]stageLP, 0, 3e5)
+	stagesLDDS = make([]stageLD, 0, 3e5)
 )
 
 func init() {
@@ -111,9 +112,53 @@ func init() {
 			// CSV header
 			continue
 		}
-		stageLPDS = append(stageLPDS, stageLP{
+		stagesLDDS = append(stagesLDDS, stageLD{
 			lang: rec[1],
 			text: rec[0],
 		})
 	}
+}
+
+func TestPredictLanguage(t *testing.T) {
+	testFn := func(tb testing.TB, stages []stageLD, fn func(string, string) string) {
+		var c, p, n int
+		for _, s := range stages {
+			lang := fn(s.text, "English")
+			if lang == s.lang {
+				p++
+			} else {
+				n++
+			}
+			c++
+		}
+		t.Logf("stages %d: positive ld %d; negative ld %d", c, p, n)
+	}
+	t.Run("lingua: hello world", func(t *testing.T) { testFn(t, stagesLDHW, ldLinguaPredict) })
+	t.Run("lingua: dataset", func(t *testing.T) { testFn(t, stagesLDDS, ldLinguaPredict) })
+	t.Run("whatlang: hello world", func(t *testing.T) { testFn(t, stagesLDHW, ldWhatLang) })
+	t.Run("whatlang: dataset", func(t *testing.T) { testFn(t, stagesLDDS, ldWhatLang) })
+}
+
+func BenchmarkPredictLanguage(b *testing.B) {
+	benchFn := func(b *testing.B, stages []stageLD, fn func(string, string) string) {
+		b.ReportAllocs()
+		b.ResetTimer()
+		l := len(stages) - 1
+		var c, p, n int
+		for i := 0; i < b.N; i++ {
+			s := stages[i%l]
+			lang := fn(s.text, "English")
+			if lang == s.lang {
+				p++
+			} else {
+				n++
+			}
+			c++
+		}
+		b.Logf("stages %d: positive ld %d; negative ld %d", c, p, n)
+	}
+	b.Run("lingua: hello world", func(b *testing.B) { benchFn(b, stagesLDHW, ldLinguaPredict) })
+	b.Run("lingua: dataset", func(b *testing.B) { benchFn(b, stagesLDDS, ldLinguaPredict) })
+	b.Run("whatlang: hello world", func(b *testing.B) { benchFn(b, stagesLDHW, ldWhatLang) })
+	b.Run("whatlang: dataset", func(b *testing.B) { benchFn(b, stagesLDDS, ldWhatLang) })
 }
