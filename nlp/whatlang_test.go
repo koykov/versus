@@ -5,7 +5,7 @@ import (
 )
 
 func ldWhatLang(s, def string) string {
-	r := whatlanggo.Detect("Foje funkcias kaj foje ne funkcias")
+	r := whatlanggo.Detect(s)
 	if lang := r.Lang.String(); len(lang) > 0 {
 		return lang
 	}
