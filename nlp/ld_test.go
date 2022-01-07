@@ -119,7 +119,7 @@ func init() {
 	}
 }
 
-func TestPredictLanguage(t *testing.T) {
+func TestLanguageDetect(t *testing.T) {
 	testFn := func(tb testing.TB, stages []stageLD, fn func(string, string) string) {
 		var c, p, n int
 		for _, s := range stages {
@@ -139,7 +139,7 @@ func TestPredictLanguage(t *testing.T) {
 	t.Run("whatlang: dataset", func(t *testing.T) { testFn(t, stagesLDDS, ldWhatLang) })
 }
 
-func BenchmarkPredictLanguage(b *testing.B) {
+func BenchmarkLanguageDetect(b *testing.B) {
 	benchFn := func(b *testing.B, stages []stageLD, fn func(string, string) string) {
 		b.ReportAllocs()
 		b.ResetTimer()
