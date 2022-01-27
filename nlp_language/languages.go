@@ -1,4 +1,4 @@
-package stringer
+package nlp_language
 
 type Language uint
 

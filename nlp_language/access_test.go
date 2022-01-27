@@ -1,4 +1,4 @@
-package stringer
+package nlp_language
 
 import (
 	"testing"
@@ -11,7 +11,7 @@ func BenchmarkAccess(b *testing.B) {
 		b.ReportAllocs()
 		var x string
 		for i := 0; i < b.N; i++ {
-			x = nlp.Russian.String()
+			x = nlp.LanguageRussian.String()
 		}
 		_ = x
 	})
