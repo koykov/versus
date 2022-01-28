@@ -30,7 +30,7 @@ func main() {
 		ln  []uint
 	)
 
-	_, _ = buf.WriteString("// DO NOT EDIT.\n\npackage testdata\n\nvar Model = map[int32][]uint{\n")
+	_, _ = buf.WriteString("// DO NOT EDIT.\n\npackage testdata\n\ntype Tuple struct{\n\tC int32\n\tS []uint\n}\n\nvar Model = []Tuple{\n")
 
 	scr := bufio.NewScanner(file)
 	for scr.Scan() {
@@ -52,15 +52,16 @@ func main() {
 				}
 			}
 			if len(ln) > 0 {
+				_ = buf.WriteByte('{')
 				_, _ = buf.WriteString(strconv.Itoa(int(i64)))
-				_, _ = buf.WriteString(":{")
+				_, _ = buf.WriteString(", []uint{")
 				for i := 0; i < len(ln); i++ {
 					if i > 0 {
 						_ = buf.WriteByte(',')
 					}
 					_, _ = buf.WriteString(strconv.Itoa(int(ln[i])))
 				}
-				_, _ = buf.WriteString("},\n")
+				_, _ = buf.WriteString("}},\n")
 			}
 		}
 	}
