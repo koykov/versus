@@ -13,8 +13,8 @@ func BenchmarkEvaluate(b *testing.B) {
 		var y bool
 		for i := 0; i < b.N; i++ {
 			x := &testdata.Model[i%l]
-			for j := 0; j < len(scripts); j++ {
-				y = unicode.Is(scripts[j].b, x.C)
+			for j := 0; j < len(x.S); j++ {
+				y = unicode.Is(scripts[x.S[j]].b, x.C)
 			}
 			_ = y
 		}
@@ -23,8 +23,8 @@ func BenchmarkEvaluate(b *testing.B) {
 		var y bool
 		for i := 0; i < b.N; i++ {
 			x := &testdata.Model[i%l]
-			for j := 0; j < len(scripts); j++ {
-				y = scripts[j].a.EvaluateRune(x.C)
+			for j := 0; j < len(x.S); j++ {
+				y = scripts[x.S[j]].a.EvaluateRune(x.C)
 			}
 			_ = y
 		}
