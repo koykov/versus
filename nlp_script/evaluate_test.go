@@ -24,7 +24,7 @@ func BenchmarkEvaluate(b *testing.B) {
 		for i := 0; i < b.N; i++ {
 			x := &testdata.Model[i%l]
 			for j := 0; j < len(x.S); j++ {
-				y = scripts[x.S[j]].a.EvaluateRune(x.C)
+				y = scripts[x.S[j]].a.Evaluate(x.C)
 			}
 			_ = y
 		}
