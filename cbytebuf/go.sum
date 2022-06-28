@@ -1,0 +1,10 @@
+github.com/koykov/cbyte v0.0.0-20210320125217-aa2cbbd67631 h1:Q128eox3Mz3+rwRLB+OHreXIm0MM0Yjitsw+RyoIttA=
+github.com/koykov/cbyte v0.0.0-20210320125217-aa2cbbd67631/go.mod h1:m4xVVamXPUlD8tSJGTF1M98l/GBkgU9KjCYmzQsIMxU=
+github.com/koykov/cbytebuf v0.0.0-20210722210402-4a93ea99bc23 h1:OGnTibmXvielGrlqWMVXITAa7xEQ/00bwA1fZdmnOWs=
+github.com/koykov/cbytebuf v0.0.0-20210722210402-4a93ea99bc23/go.mod h1:coPzZjW5Z+9LzardHEhHzHo5Es7rMytMl/FPMjCf98Y=
+github.com/koykov/fastconv v0.0.0-20211028200057-f6897ace3bc2 h1:jIlvXIudUQ6ER2y/oExe8Qa3lnZ+6C0BpPthjfDhxvs=
+github.com/koykov/fastconv v0.0.0-20211028200057-f6897ace3bc2/go.mod h1:JXdtdh0aCcSmxLsVUoYP61lmxpL6dWOXEKxCIR+MlGg=
+github.com/koykov/lbpool v0.0.0-20220624192435-0d9ef51aad0d h1:rvnIlHqKU++wpNL9e3g7dlBQL2x6MVCSrPnwXcU/bmI=
+github.com/koykov/lbpool v0.0.0-20220624192435-0d9ef51aad0d/go.mod h1:BAP4KCJGGY065PiCwGFt2etMadUboRm3bxyDz85fiuc=
+github.com/valyala/bytebufferpool v1.0.0 h1:GqA5TC/0021Y/b9FG4Oi9Mr3q7XYx6KllzawFIhcdPw=
+github.com/valyala/bytebufferpool v1.0.0/go.mod h1:6bBcMArwyJ5K/AmCkWv1jt77kVWyCJ6HpOuEn7z0Csc=
