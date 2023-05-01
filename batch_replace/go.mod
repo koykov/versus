@@ -1,9 +1,11 @@
 module github.com/koykov/versus/batch_replace
 
-go 1.16
+go 1.18
+
+require github.com/koykov/batch_replace v1.1.1
 
 require (
-	github.com/koykov/batch_replace v0.0.0-20211101214815-fb2bcb7a1b3f
-	github.com/koykov/bytealg v0.0.0-20220528213442-ac92b7cc2f07 // indirect
-	github.com/koykov/fastconv v0.0.0-20211028200057-f6897ace3bc2 // indirect
+	github.com/koykov/bytealg v1.0.2 // indirect
+	github.com/koykov/byteseq v0.0.0-20230330194259-68973f3b765a // indirect
+	github.com/koykov/fastconv v1.0.2 // indirect
 )

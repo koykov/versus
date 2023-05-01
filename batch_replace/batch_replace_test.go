@@ -11,7 +11,7 @@ func BenchmarkBatchReplace(b *testing.B) {
 	b.Run("b2x", func(b *testing.B) {
 		b.ReportAllocs()
 		for i := 0; i < b.N; i++ {
-			r := batch_replace.AcquireWithBytesSrc(breplOrigin)
+			r := batch_replace.AcquireWithSource(breplOrigin)
 			n := r.BytesToBytes(brTag0, brTag0Val).
 				BytesToBytes(brTag1, brTag1Val).
 				BytesToFloat(brTag2, 1234567.0987654321).
@@ -26,7 +26,7 @@ func BenchmarkBatchReplace(b *testing.B) {
 	b.Run("s2x", func(b *testing.B) {
 		b.ReportAllocs()
 		for i := 0; i < b.N; i++ {
-			r := batch_replace.AcquireWithStrSrc(breplOriginS)
+			r := batch_replace.AcquireWithSource(breplOriginS)
 			n := r.StrToStr(brTag0S, brTag0ValS).
 				StrToStr(brTag1S, brTag1ValS).
 				StrToFloat(brTag2S, 1234567.0987654321).
