@@ -83,14 +83,14 @@ func BenchmarkInspectorGet(b *testing.B) {
 	})
 }
 
-func BenchmarkInspectorCmp(b *testing.B) {
+func BenchmarkInspectorCompare(b *testing.B) {
 	insp := &testobj_ins.TestObjectInspector{}
 
 	b.Run("id", func(b *testing.B) {
 		var buf bool
 		b.ReportAllocs()
 		for i := 0; i < b.N; i++ {
-			_ = insp.Cmp(testO, inspector.OpEq, "foo", &buf, p0...)
+			_ = insp.Compare(testO, inspector.OpEq, "foo", &buf, p0...)
 			if !buf {
 				b.Error("object.Id: mismatch result and expectation")
 			}
@@ -100,7 +100,7 @@ func BenchmarkInspectorCmp(b *testing.B) {
 		var buf bool
 		b.ReportAllocs()
 		for i := 0; i < b.N; i++ {
-			_ = insp.Cmp(testO, inspector.OpEq, "bar", &buf, p1...)
+			_ = insp.Compare(testO, inspector.OpEq, "bar", &buf, p1...)
 			if !buf {
 				b.Error("object.Name: mismatch result and expectation")
 			}
@@ -110,7 +110,7 @@ func BenchmarkInspectorCmp(b *testing.B) {
 		var buf bool
 		b.ReportAllocs()
 		for i := 0; i < b.N; i++ {
-			_ = insp.Cmp(testO, inspector.OpGtq, "60", &buf, p7...)
+			_ = insp.Compare(testO, inspector.OpGtq, "60", &buf, p7...)
 			if !buf {
 				b.Error("object.Status: mismatch result and expectation")
 			}
@@ -120,7 +120,7 @@ func BenchmarkInspectorCmp(b *testing.B) {
 		var buf bool
 		b.ReportAllocs()
 		for i := 0; i < b.N; i++ {
-			_ = insp.Cmp(testO, inspector.OpLtq, "5000", &buf, p8...)
+			_ = insp.Compare(testO, inspector.OpLtq, "5000", &buf, p8...)
 			if !buf {
 				b.Error("object.Finance.MoneyIn: mismatch result and expectation")
 			}
