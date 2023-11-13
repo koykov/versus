@@ -3,8 +3,8 @@ module github.com/koykov/versus/jsonvector
 go 1.18
 
 require (
-	github.com/koykov/jsonvector v1.2.1
-	github.com/koykov/vector v1.2.2
+	github.com/koykov/jsonvector v1.2.2
+	github.com/koykov/vector v1.2.4
 	github.com/valyala/fastjson v1.6.4
 )
 
