@@ -2,7 +2,7 @@ package jsonvector
 
 import (
 	"fmt"
-	"io/ioutil"
+	"os"
 
 	"github.com/valyala/fastjson"
 )
@@ -22,7 +22,7 @@ var (
 )
 
 func getFromFile(filename string) string {
-	data, err := ioutil.ReadFile(filename)
+	data, err := os.ReadFile(filename)
 	if err != nil {
 		panic(fmt.Errorf("cannot read %s: %s", filename, err))
 	}
