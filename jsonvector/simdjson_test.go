@@ -2,11 +2,16 @@ package jsonvector
 
 import (
 	"fmt"
+	"sync"
 	"testing"
 
 	"github.com/koykov/byteconv"
 	"github.com/minio/simdjson-go"
 )
+
+var poolSimdjson = sync.Pool{New: func() any {
+	return &simdjson.ParsedJson{}
+}}
 
 func BenchmarkParseSimdjson(b *testing.B) {
 	b.Run("small", func(b *testing.B) {
@@ -34,10 +39,12 @@ func benchSimdjson(b *testing.B, s string) {
 	b.SetBytes(int64(len(s)))
 	b.RunParallel(func(pb *testing.PB) {
 		for pb.Next() {
-			_, err := simdjson.Parse(byteconv.S2B(s), nil)
-			if err != nil {
+			var err error
+			parsed := poolSimdjson.Get().(*simdjson.ParsedJson)
+			if parsed, err = simdjson.Parse(byteconv.S2B(s), parsed); err != nil {
 				panic(fmt.Errorf("unexpected error: %s", err))
 			}
+			poolSimdjson.Put(parsed)
 		}
 	})
 }
