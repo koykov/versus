@@ -1,26 +1,26 @@
 ## Core i7-7700HQ (no pool)
 
 ```
-BenchmarkParseFastJSON/small/fastjson-8         	 9719614	       115.7 ns/op	1642.09 MB/s	       0 B/op	       0 allocs/op
-BenchmarkParseFastJSON/medium/fastjson-8        	 1264318	       933.6 ns/op	2494.74 MB/s	       0 B/op	       0 allocs/op
-BenchmarkParseFastJSON/large/fastjson-8         	   93084	     11317 ns/op	2484.51 MB/s	       0 B/op	       0 allocs/op
-BenchmarkParseFastJSON/canada/fastjson-8        	     626	   1860054 ns/op	1210.21 MB/s	       7 B/op	       0 allocs/op
-BenchmarkParseFastJSON/citm/fastjson-8          	    1654	    714085 ns/op	2418.77 MB/s	       2 B/op	       0 allocs/op
-BenchmarkParseFastJSON/twitter/fastjson-8       	    4732	    266328 ns/op	2371.19 MB/s	       0 B/op	       0 allocs/op
+BenchmarkParseFastJSON/small-8         	 9719614	       115.7 ns/op	1642.09 MB/s	       0 B/op	       0 allocs/op
+BenchmarkParseFastJSON/medium-8        	 1264318	       933.6 ns/op	2494.74 MB/s	       0 B/op	       0 allocs/op
+BenchmarkParseFastJSON/large-8         	   93084	     11317 ns/op	2484.51 MB/s	       0 B/op	       0 allocs/op
+BenchmarkParseFastJSON/canada-8        	     626	   1860054 ns/op	1210.21 MB/s	       7 B/op	       0 allocs/op
+BenchmarkParseFastJSON/citm-8          	    1654	    714085 ns/op	2418.77 MB/s	       2 B/op	       0 allocs/op
+BenchmarkParseFastJSON/twitter-8       	    4732	    266328 ns/op	2371.19 MB/s	       0 B/op	       0 allocs/op
 
-BenchmarkParseJsonvector/small/jsonvector-8     	 4942929	       236.0 ns/op	 805.03 MB/s	       0 B/op	       0 allocs/op
-BenchmarkParseJsonvector/medium/jsonvector-8    	  619875	      1910 ns/op	1219.48 MB/s	       0 B/op	       0 allocs/op
-BenchmarkParseJsonvector/large/jsonvector-8     	   41522	     28695 ns/op	 979.90 MB/s	       0 B/op	       0 allocs/op
-BenchmarkParseJsonvector/canada/jsonvector-8    	     154	   7097310 ns/op	 317.17 MB/s	      30 B/op	       0 allocs/op
-BenchmarkParseJsonvector/citm/jsonvector-8      	     687	   1686870 ns/op	1023.91 MB/s	       3 B/op	       0 allocs/op
-BenchmarkParseJsonvector/twitter/jsonvector-8   	    1897	    614699 ns/op	1027.35 MB/s	       2 B/op	       0 allocs/op
+BenchmarkParseJsonvector/small-8     	 4942929	       236.0 ns/op	 805.03 MB/s	       0 B/op	       0 allocs/op
+BenchmarkParseJsonvector/medium-8    	  619875	      1910 ns/op	1219.48 MB/s	       0 B/op	       0 allocs/op
+BenchmarkParseJsonvector/large-8     	   41522	     28695 ns/op	 979.90 MB/s	       0 B/op	       0 allocs/op
+BenchmarkParseJsonvector/canada-8    	     154	   7097310 ns/op	 317.17 MB/s	      30 B/op	       0 allocs/op
+BenchmarkParseJsonvector/citm-8      	     687	   1686870 ns/op	1023.91 MB/s	       3 B/op	       0 allocs/op
+BenchmarkParseJsonvector/twitter-8   	    1897	    614699 ns/op	1027.35 MB/s	       2 B/op	       0 allocs/op
 
-BenchmarkParseSimdjson/small/simdjson-8         	  110518	     10390 ns/op	  18.29 MB/s	  108808 B/op	       9 allocs/op
-BenchmarkParseSimdjson/medium/simdjson-8        	   93631	     12289 ns/op	 189.52 MB/s	  114872 B/op	      11 allocs/op
-BenchmarkParseSimdjson/large/simdjson-8         	   22711	     50925 ns/op	 552.15 MB/s	  244250 B/op	      14 allocs/op
-BenchmarkParseSimdjson/canada/simdjson-8        	     222	   4812389 ns/op	 467.76 MB/s	 3040797 B/op	      10 allocs/op
-BenchmarkParseSimdjson/citm/simdjson-8          	    1141	   1114941 ns/op	1549.14 MB/s	 2721306 B/op	      11 allocs/op
-BenchmarkParseSimdjson/twitter/simdjson-8       	    2259	    483359 ns/op	1306.51 MB/s	 1828377 B/op	      13 allocs/op
+BenchmarkParseSimdjson/small-8         	  110518	     10390 ns/op	  18.29 MB/s	  108808 B/op	       9 allocs/op
+BenchmarkParseSimdjson/medium-8        	   93631	     12289 ns/op	 189.52 MB/s	  114872 B/op	      11 allocs/op
+BenchmarkParseSimdjson/large-8         	   22711	     50925 ns/op	 552.15 MB/s	  244250 B/op	      14 allocs/op
+BenchmarkParseSimdjson/canada-8        	     222	   4812389 ns/op	 467.76 MB/s	 3040797 B/op	      10 allocs/op
+BenchmarkParseSimdjson/citm-8          	    1141	   1114941 ns/op	1549.14 MB/s	 2721306 B/op	      11 allocs/op
+BenchmarkParseSimdjson/twitter-8       	    2259	    483359 ns/op	1306.51 MB/s	 1828377 B/op	      13 allocs/op
 ```
 
 ## Core i7-7700HQ (pool)
