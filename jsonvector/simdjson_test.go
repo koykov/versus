@@ -10,26 +10,26 @@ import (
 
 func BenchmarkParseSimdjson(b *testing.B) {
 	b.Run("small", func(b *testing.B) {
-		benchmarkParseSimdjson(b, smallFixture)
+		benchSimdjson(b, smallFixture)
 	})
 	b.Run("medium", func(b *testing.B) {
-		benchmarkParseSimdjson(b, mediumFixture)
+		benchSimdjson(b, mediumFixture)
 	})
 	b.Run("large", func(b *testing.B) {
-		benchmarkParseSimdjson(b, largeFixture)
+		benchSimdjson(b, largeFixture)
 	})
 	b.Run("canada", func(b *testing.B) {
-		benchmarkParseSimdjson(b, canadaFixture)
+		benchSimdjson(b, canadaFixture)
 	})
 	b.Run("citm", func(b *testing.B) {
-		benchmarkParseSimdjson(b, citmFixture)
+		benchSimdjson(b, citmFixture)
 	})
 	b.Run("twitter", func(b *testing.B) {
-		benchmarkParseSimdjson(b, twitterFixture)
+		benchSimdjson(b, twitterFixture)
 	})
 }
 
-func benchmarkSimdjsonParse(b *testing.B, s string) {
+func benchSimdjson(b *testing.B, s string) {
 	b.ReportAllocs()
 	b.SetBytes(int64(len(s)))
 	b.RunParallel(func(pb *testing.PB) {
@@ -39,11 +39,5 @@ func benchmarkSimdjsonParse(b *testing.B, s string) {
 				panic(fmt.Errorf("unexpected error: %s", err))
 			}
 		}
-	})
-}
-
-func benchmarkParseSimdjson(b *testing.B, s string) {
-	b.Run("simdjson", func(b *testing.B) {
-		benchmarkSimdjsonParse(b, s)
 	})
 }

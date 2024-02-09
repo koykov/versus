@@ -9,26 +9,26 @@ import (
 
 func BenchmarkParseFastJSON(b *testing.B) {
 	b.Run("small", func(b *testing.B) {
-		benchmarkParseFastJSON(b, smallFixture)
+		benchFastjson(b, smallFixture)
 	})
 	b.Run("medium", func(b *testing.B) {
-		benchmarkParseFastJSON(b, mediumFixture)
+		benchFastjson(b, mediumFixture)
 	})
 	b.Run("large", func(b *testing.B) {
-		benchmarkParseFastJSON(b, largeFixture)
+		benchFastjson(b, largeFixture)
 	})
 	b.Run("canada", func(b *testing.B) {
-		benchmarkParseFastJSON(b, canadaFixture)
+		benchFastjson(b, canadaFixture)
 	})
 	b.Run("citm", func(b *testing.B) {
-		benchmarkParseFastJSON(b, citmFixture)
+		benchFastjson(b, citmFixture)
 	})
 	b.Run("twitter", func(b *testing.B) {
-		benchmarkParseFastJSON(b, twitterFixture)
+		benchFastjson(b, twitterFixture)
 	})
 }
 
-func benchmarkFastJSONParse(b *testing.B, s string) {
+func benchFastjson(b *testing.B, s string) {
 	b.ReportAllocs()
 	b.SetBytes(int64(len(s)))
 	b.RunParallel(func(pb *testing.PB) {
@@ -43,11 +43,5 @@ func benchmarkFastJSONParse(b *testing.B, s string) {
 			}
 		}
 		poolFJ.Put(p)
-	})
-}
-
-func benchmarkParseFastJSON(b *testing.B, s string) {
-	b.Run("fastjson", func(b *testing.B) {
-		benchmarkFastJSONParse(b, s)
 	})
 }

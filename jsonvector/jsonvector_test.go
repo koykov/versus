@@ -19,26 +19,26 @@ func TestParseJsonvector(t *testing.T) {
 
 func BenchmarkParseJsonvector(b *testing.B) {
 	b.Run("small", func(b *testing.B) {
-		benchmarkParseJsonvector(b, smallFixture)
+		benchJsonvector(b, smallFixture)
 	})
 	b.Run("medium", func(b *testing.B) {
-		benchmarkParseJsonvector(b, mediumFixture)
+		benchJsonvector(b, mediumFixture)
 	})
 	b.Run("large", func(b *testing.B) {
-		benchmarkParseJsonvector(b, largeFixture)
+		benchJsonvector(b, largeFixture)
 	})
 	b.Run("canada", func(b *testing.B) {
-		benchmarkParseJsonvector(b, canadaFixture)
+		benchJsonvector(b, canadaFixture)
 	})
 	b.Run("citm", func(b *testing.B) {
-		benchmarkParseJsonvector(b, citmFixture)
+		benchJsonvector(b, citmFixture)
 	})
 	b.Run("twitter", func(b *testing.B) {
-		benchmarkParseJsonvector(b, twitterFixture)
+		benchJsonvector(b, twitterFixture)
 	})
 }
 
-func benchmarkJsonvectorParse(b *testing.B, s string) {
+func benchJsonvector(b *testing.B, s string) {
 	b.ReportAllocs()
 	b.SetBytes(int64(len(s)))
 	b.RunParallel(func(pb *testing.PB) {
@@ -55,11 +55,5 @@ func benchmarkJsonvectorParse(b *testing.B, s string) {
 			p.Reset()
 		}
 		jsonvector.Release(p)
-	})
-}
-
-func benchmarkParseJsonvector(b *testing.B, s string) {
-	b.Run("jsonvector", func(b *testing.B) {
-		benchmarkJsonvectorParse(b, s)
 	})
 }
