@@ -1,7 +1,13 @@
+github.com/klauspost/compress v1.15.15 h1:EF27CXIuDsYJ6mmvtBRlEuB2UVOqHG1tAXgZ7yIO+lw=
+github.com/klauspost/compress v1.15.15/go.mod h1:ZcK2JAFqKOpnBlxcLsJzYfrS9X1akm9fHZNnD9+Vo/4=
+github.com/klauspost/cpuid/v2 v2.2.3 h1:sxCkb+qR91z4vsqw4vGGZlDgPz3G7gjaLyK3V8y70BU=
+github.com/klauspost/cpuid/v2 v2.2.3/go.mod h1:RVVoqg1df56z8g3pUjL/3lE5UfnlrJX8tyFgg4nqhuY=
 github.com/koykov/bitset v1.0.0 h1:2mEbAhKelhpdWqnpa+mR3HRhdMsto5od7ACOi6MIAmk=
 github.com/koykov/bitset v1.0.0/go.mod h1:DVR3bH49c1oOcNtD38h+aQq7lp1ZY91cXmjOldlTk8A=
 github.com/koykov/bytealg v1.0.2 h1:e9le4zkWnK9o1dsjlEtIPjC4JuHof+w0XsyOnYGLOvs=
 github.com/koykov/bytealg v1.0.2/go.mod h1:3jLF2zTF1XO+E9dyodNDd3kWyhavUdVUXaIwqPkikB0=
+github.com/koykov/byteconv v1.0.0 h1:C8NThxj3Vcmv7f1h384Ti7F9zjVDnOy9AZj9KxTaYqM=
+github.com/koykov/byteconv v1.0.0/go.mod h1:viZknv/akQJrXOQS3bZu2U7TE+gjA03LFQpSsRExZR4=
 github.com/koykov/byteptr v1.0.0 h1:tOMEM2qwfFOKTeMNgnzHKyBVWeXxiD1SduLlbzVKJJg=
 github.com/koykov/byteptr v1.0.0/go.mod h1:SSRuU7v8JgUo1deHib6Za8s6ya1PQEG2gNpRVKsO3QM=
 github.com/koykov/byteseq v0.0.0-20230330194259-68973f3b765a h1:2q77e/w+8RE5VwIaR2KwcF4f+PqEemrgOiRA/xhM7S4=
@@ -14,5 +20,9 @@ github.com/koykov/jsonvector v1.2.2 h1:q764JekxpFh8m/mRe/9vuh/S0eTjyCdGUKywNP9cM
 github.com/koykov/jsonvector v1.2.2/go.mod h1:Wzli47+lXMuT+qmPQWynkiKgC1MEo5FolXHavsxZX9Y=
 github.com/koykov/vector v1.2.4 h1:1z4DYA3ek16VO83Ogv4TmGWj13RPRtvPlnRF3Gnfkrs=
 github.com/koykov/vector v1.2.4/go.mod h1:taIaBTVvLApbghwTnYu71CQLGLV9i2OhAo48JIr+OJI=
+github.com/minio/simdjson-go v0.4.5 h1:r4IQwjRGmWCQ2VeMc7fGiilu1z5du0gJ/I/FsKwgo5A=
+github.com/minio/simdjson-go v0.4.5/go.mod h1:eoNz0DcLQRyEDeaPr4Ru6JpjlZPzbA0IodxVJk8lO8E=
 github.com/valyala/fastjson v1.6.4 h1:uAUNq9Z6ymTgGhcm0UynUAB6tlbakBrz6CQFax3BXVQ=
 github.com/valyala/fastjson v1.6.4/go.mod h1:CLCAqky6SMuOcxStkYQvblddUtoRxhYMGLrsQns1aXY=
+golang.org/x/sys v0.0.0-20220704084225-05e143d24a9e h1:CsOuNlbOuf0mzxJIefr6Q4uAUetRUwZE4qt7VfzP+xo=
+golang.org/x/sys v0.0.0-20220704084225-05e143d24a9e/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=
