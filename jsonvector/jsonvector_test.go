@@ -42,8 +42,8 @@ func benchJsonvector(b *testing.B, s string) {
 	b.ReportAllocs()
 	b.SetBytes(int64(len(s)))
 	b.RunParallel(func(pb *testing.PB) {
-		p := jsonvector.Acquire()
 		for pb.Next() {
+			p := jsonvector.AcquireNoClear()
 			err := p.ParseStr(s)
 			if err != nil {
 				panic(fmt.Errorf("unexpected error: %s", err))
@@ -52,8 +52,7 @@ func benchJsonvector(b *testing.B, s string) {
 			if v.Type() != vector.TypeObj {
 				panic(fmt.Errorf("unexpected value type; got %d; want %d", v.Type(), vector.TypeObj))
 			}
-			p.Reset()
+			jsonvector.Release(p)
 		}
-		jsonvector.Release(p)
 	})
 }

@@ -32,8 +32,8 @@ func benchFastjson(b *testing.B, s string) {
 	b.ReportAllocs()
 	b.SetBytes(int64(len(s)))
 	b.RunParallel(func(pb *testing.PB) {
-		p := poolFJ.Get()
 		for pb.Next() {
+			p := poolFJ.Get()
 			v, err := p.Parse(s)
 			if err != nil {
 				panic(fmt.Errorf("unexpected error: %s", err))
@@ -41,7 +41,7 @@ func benchFastjson(b *testing.B, s string) {
 			if v.Type() != fastjson.TypeObject {
 				panic(fmt.Errorf("unexpected value type; got %s; want %s", v.Type(), fastjson.TypeObject))
 			}
+			poolFJ.Put(p)
 		}
-		poolFJ.Put(p)
 	})
 }
