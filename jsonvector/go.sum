@@ -18,8 +18,8 @@ github.com/koykov/fastconv v1.0.2 h1:csOWpctD9OcpkfI07LEtqtolc4TT8Y6QG3zQvkTmhrQ
 github.com/koykov/fastconv v1.0.2/go.mod h1:9jOx5KRGe4UKHxGiDw5Yrp/qrqn2cRwH3xvFjqqCE3c=
 github.com/koykov/indirect v1.0.0 h1:3kog1xvVUEB2142K2/AZRhnOKN2N8KNahHHkE+KT7ec=
 github.com/koykov/indirect v1.0.0/go.mod h1:2qWC0hrIHIexlKaqPA0VWEa0s2V/qxxNJv7XPncnh2I=
-github.com/koykov/jsonvector v1.2.3-0.20240301213733-00a94de53cdd h1:SB8bveuShflF3WnCI9UESZk9LayI+29Uo/PduFfEw+o=
-github.com/koykov/jsonvector v1.2.3-0.20240301213733-00a94de53cdd/go.mod h1:Z4KLbz86DByQ+02TQbHcWsc5RyZaCvzqUAhCYt532XM=
+github.com/koykov/jsonvector v1.2.3-0.20240301221953-a91d10997e14 h1:EadQT1Q+6DZfSSyByCJOBPp3BmFxK6Jc2aR8pV5odQM=
+github.com/koykov/jsonvector v1.2.3-0.20240301221953-a91d10997e14/go.mod h1:qlETfTMWwtS25XVJhDIB5NK3Y/vQI0NPbtXAeEbEkVA=
 github.com/koykov/openrt v0.0.0-20240220213454-7b5b4e8c30a5 h1:Gf4EYzitGI5RjjRKT2fhYJcGuo9g6HRM4jvCO4KmmlA=
 github.com/koykov/openrt v0.0.0-20240220213454-7b5b4e8c30a5/go.mod h1:y8Xa99HTBmthCilUUW36IZJd5SP9Rb+W8S9CJaauyU8=
 github.com/koykov/vector v1.2.5-0.20240229211231-223114d4304e h1:gKfuMNmek+3MY34fKuPttmDDOr1DxFozp6NQhFJJl6I=
