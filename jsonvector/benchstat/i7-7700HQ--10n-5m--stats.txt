@@ -24,4 +24,3 @@ ParseSimdjson/large-8                     1.164Gi ± 3%    1.170Gi ± 3%        
 ParseSimdjson/canada-8                    496.7Mi ± 1%    484.7Mi ± 0%    -2.42% (p=0.000 n=10)
 ParseSimdjson/citm-8                      2.055Gi ± 1%    1.997Gi ± 2%    -2.85% (p=0.000 n=10)
 ParseSimdjson/twitter-8                   2.048Gi ± 2%    2.049Gi ± 1%         ~ (p=0.912 n=10)
-geomean                                   1.254Gi         1.589Gi        +26.80%
