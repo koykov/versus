@@ -9,6 +9,7 @@ import (
 func BenchmarkUrlvector(b *testing.B) {
 	b.Run("parse url", func(b *testing.B) {
 		b.ReportAllocs()
+		b.SetBytes(int64(len(url0)))
 		for i := 0; i < b.N; i++ {
 			vec := urlvector.Acquire()
 			err := vec.ParseCopy(url0)
@@ -40,6 +41,7 @@ func BenchmarkUrlvector(b *testing.B) {
 	})
 	b.Run("parse query", func(b *testing.B) {
 		b.ReportAllocs()
+		b.SetBytes(int64(len(url0)))
 		for i := 0; i < b.N; i++ {
 			vec := urlvector.Acquire()
 			err := vec.ParseCopy(url0)
@@ -66,6 +68,7 @@ func BenchmarkUrlvector(b *testing.B) {
 	})
 	b.Run("mod host", func(b *testing.B) {
 		b.ReportAllocs()
+		b.SetBytes(int64(len(url0)))
 		for i := 0; i < b.N; i++ {
 			vec := urlvector.Acquire()
 			err := vec.ParseCopy(url0)
@@ -83,6 +86,7 @@ func BenchmarkUrlvector(b *testing.B) {
 	})
 	b.Run("mod query", func(b *testing.B) {
 		b.ReportAllocs()
+		b.SetBytes(int64(len(url0)))
 		for i := 0; i < b.N; i++ {
 			vec := urlvector.Acquire()
 			err := vec.ParseCopy(url0)
