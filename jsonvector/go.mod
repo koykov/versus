@@ -14,7 +14,7 @@ require (
 	github.com/klauspost/compress v1.15.15 // indirect
 	github.com/klauspost/cpuid/v2 v2.2.3 // indirect
 	github.com/koykov/bitset v1.0.0 // indirect
-	github.com/koykov/bytealg v1.0.4-0.20240218202342-096dfeea1dfa // indirect
+	github.com/koykov/bytealg v1.0.4-0.20240304210918-a851188c7945 // indirect
 	github.com/koykov/byteptr v1.0.0 // indirect
 	github.com/koykov/byteseq v1.0.1 // indirect
 	github.com/koykov/entry v1.0.2 // indirect
