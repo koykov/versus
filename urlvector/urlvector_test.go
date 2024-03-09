@@ -22,7 +22,7 @@ func benchUrlvector(b *testing.B, s string) {
 			vec := urlvector.Acquire()
 			_ = vec.ParseStr(s)
 			_ = vec.Query()
-			urlvector.Release(vec)
+			urlvector.ReleaseNC(vec)
 		}
 	})
 }
