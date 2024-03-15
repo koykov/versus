@@ -2,25 +2,25 @@ goos: linux
 goarch: amd64
 pkg: github.com/koykov/versus/jsonvector
 cpu: 11th Gen Intel(R) Core(TM) i7-1185G7 @ 3.00GHz
-                          │ benchstat/i7-1185G--10n-1m--old.txt │   benchstat/i7-1185G--10n-1m--new.txt   │
-                          │                 B/s                 │      B/s        vs base                 │
-ParseFastJSON/small-8                             1.398Gi ± 54%    1.310Gi ±  5%    -6.29% (p=0.019 n=10)
-ParseFastJSON/medium-8                            2.197Gi ±  6%    2.140Gi ±  3%         ~ (p=0.105 n=10)
-ParseFastJSON/large-8                             2.044Gi ±  6%    2.015Gi ±  0%         ~ (p=0.143 n=10)
-ParseFastJSON/canada-8                            855.4Mi ±  1%    850.9Mi ±  2%         ~ (p=0.165 n=10)
-ParseFastJSON/citm-8                              1.860Gi ±  2%    1.841Gi ±  2%         ~ (p=0.063 n=10)
-ParseFastJSON/twitter-8                           2.474Gi ±  1%    2.456Gi ±  1%    -0.76% (p=0.043 n=10)
+                          │ benchstat/i7-1185G7--10n-1m--old.txt │  benchstat/i7-1185G7--10n-1m--new.txt   │
+                          │                 B/s                  │      B/s        vs base                 │
+ParseFastJSON/small-8                              1.398Gi ± 54%    1.310Gi ±  5%    -6.29% (p=0.019 n=10)
+ParseFastJSON/medium-8                             2.197Gi ±  6%    2.140Gi ±  3%         ~ (p=0.105 n=10)
+ParseFastJSON/large-8                              2.044Gi ±  6%    2.015Gi ±  0%         ~ (p=0.143 n=10)
+ParseFastJSON/canada-8                             855.4Mi ±  1%    850.9Mi ±  2%         ~ (p=0.165 n=10)
+ParseFastJSON/citm-8                               1.860Gi ±  2%    1.841Gi ±  2%         ~ (p=0.063 n=10)
+ParseFastJSON/twitter-8                            2.474Gi ±  1%    2.456Gi ±  1%    -0.76% (p=0.043 n=10)
 
-ParseJsonvector/small-8                           690.8Mi ±  2%   1162.3Mi ±  1%   +68.26% (p=0.000 n=10)
-ParseJsonvector/medium-8                          1.182Gi ±  0%    1.868Gi ±  0%   +57.95% (p=0.000 n=10)
-ParseJsonvector/large-8                           901.3Mi ±  1%   1579.6Mi ±  0%   +75.25% (p=0.000 n=10)
-ParseJsonvector/canada-8                          258.8Mi ±  1%    834.9Mi ±  0%  +222.65% (p=0.000 n=10)
-ParseJsonvector/citm-8                            923.8Mi ±  0%   2486.9Mi ±  0%  +169.19% (p=0.000 n=10)
-ParseJsonvector/twitter-8                         1.117Gi ±  1%    2.415Gi ±  1%  +116.27% (p=0.000 n=10)
+ParseJsonvector/small-8                            690.8Mi ±  2%   1942.1Mi ±  5%  +181.16% (p=0.000 n=10)
+ParseJsonvector/medium-8                           1.182Gi ±  0%    3.020Gi ±  1%  +155.40% (p=0.000 n=10)
+ParseJsonvector/large-8                            901.3Mi ±  1%   2668.5Mi ±  0%  +196.06% (p=0.000 n=10)
+ParseJsonvector/canada-8                           258.8Mi ±  1%    802.5Mi ±  1%  +210.16% (p=0.000 n=10)
+ParseJsonvector/citm-8                             923.8Mi ±  0%   3154.8Mi ±  5%  +241.49% (p=0.000 n=10)
+ParseJsonvector/twitter-8                          1.117Gi ±  1%    4.128Gi ±  2%  +269.56% (p=0.000 n=10)
 
-ParseSimdjson/small-8                             346.9Mi ±  5%    352.3Mi ±  6%         ~ (p=0.796 n=10)
-ParseSimdjson/medium-8                           1009.0Mi ±  5%   1027.2Mi ± 13%         ~ (p=0.853 n=10)
-ParseSimdjson/large-8                             934.2Mi ±  8%    944.8Mi ±  7%         ~ (p=0.529 n=10)
-ParseSimdjson/canada-8                            399.6Mi ±  2%    395.0Mi ±  0%    -1.14% (p=0.023 n=10)
-ParseSimdjson/citm-8                              1.677Gi ±  6%    1.751Gi ±  2%    +4.42% (p=0.001 n=10)
-ParseSimdjson/twitter-8                           1.580Gi ±  3%    1.628Gi ±  3%    +3.02% (p=0.043 n=10)
+ParseSimdjson/small-8                              346.9Mi ±  5%    352.3Mi ±  6%         ~ (p=0.796 n=10)
+ParseSimdjson/medium-8                            1009.0Mi ±  5%   1027.2Mi ± 13%         ~ (p=0.853 n=10)
+ParseSimdjson/large-8                              934.2Mi ±  8%    944.8Mi ±  7%         ~ (p=0.529 n=10)
+ParseSimdjson/canada-8                             399.6Mi ±  2%    395.0Mi ±  0%    -1.14% (p=0.023 n=10)
+ParseSimdjson/citm-8                               1.677Gi ±  6%    1.751Gi ±  2%    +4.42% (p=0.001 n=10)
+ParseSimdjson/twitter-8                            1.580Gi ±  3%    1.628Gi ±  3%    +3.02% (p=0.043 n=10)

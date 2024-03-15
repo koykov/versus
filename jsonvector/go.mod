@@ -4,8 +4,8 @@ go 1.18
 
 require (
 	github.com/koykov/byteconv v1.0.0
-	github.com/koykov/jsonvector v1.2.3-0.20240305201159-e0508887fb1e
-	github.com/koykov/vector v1.2.5-0.20240305200912-cee9593db908
+	github.com/koykov/jsonvector v1.2.3-0.20240314214844-e13c844f0a01
+	github.com/koykov/vector v1.2.5-0.20240314214600-a5f862dc67a5
 	github.com/minio/simdjson-go v0.4.5
 	github.com/valyala/fastjson v1.6.4
 )
