@@ -1,0 +1,18 @@
+goos: darwin
+goarch: arm64
+pkg: github.com/koykov/versus/jsonvector
+                           │ Apple-M2--10n-1m--old.txt │        Apple-M2--10n-1m--new.txt        │
+                           │            B/s            │      B/s        vs base                 │
+ParseFastJSON/small-12                   6.675Gi ±  8%    6.456Gi ± 15%         ~ (p=0.143 n=10)
+ParseFastJSON/medium-12                  9.709Gi ±  8%    9.706Gi ± 10%         ~ (p=0.796 n=10)
+ParseFastJSON/large-12                   12.06Gi ± 10%    12.38Gi ±  5%         ~ (p=0.393 n=10)
+ParseFastJSON/canada-12                  8.105Gi ±  6%    8.131Gi ±  5%         ~ (p=0.971 n=10)
+ParseFastJSON/citm-12                    13.20Gi ± 12%    13.11Gi ±  5%         ~ (p=0.796 n=10)
+ParseFastJSON/twitter-12                 14.73Gi ±  3%    14.11Gi ±  5%    -4.23% (p=0.035 n=10)
+
+ParseJsonvector/small-12                 4.067Gi ±  7%    5.181Gi ± 22%   +27.40% (p=0.000 n=10)
+ParseJsonvector/medium-12                7.607Gi ±  0%    8.515Gi ±  1%   +11.94% (p=0.000 n=10)
+ParseJsonvector/large-12                 5.823Gi ±  0%    7.109Gi ±  0%   +22.09% (p=0.000 n=10)
+ParseJsonvector/canada-12                2.754Gi ±  0%    5.985Gi ±  0%  +117.33% (p=0.000 n=10)
+ParseJsonvector/citm-12                  7.601Gi ±  0%   15.393Gi ±  0%  +102.50% (p=0.000 n=10)
+ParseJsonvector/twitter-12               9.060Gi ±  0%   12.136Gi ±  0%   +33.94% (p=0.000 n=10)
