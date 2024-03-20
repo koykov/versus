@@ -1,0 +1,23 @@
+goos: linux
+goarch: amd64
+pkg: github.com/koykov/versus/urlvector
+cpu: 11th Gen Intel(R) Core(TM) i7-1185G7 @ 3.00GHz
+                        │ i7-1185G7--10n-30s--old.txt │      i7-1185G7--10n-30s--new.txt       │
+                        │             B/s             │      B/s       vs base                 │
+ParseFastHTTP/small-8                   400.9Mi ±  4%    409.2Mi ± 2%         ~ (p=0.063 n=10)
+ParseFastHTTP/medium-8                  615.2Mi ± 39%    629.4Mi ± 2%         ~ (p=0.123 n=10)
+ParseFastHTTP/large-8                   787.6Mi ±  1%   1288.3Mi ± 1%   +63.57% (p=0.000 n=10)
+ParseFastHTTP/big-8                     1.147Gi ±  2%    1.826Gi ± 1%   +59.17% (p=0.000 n=10)
+ParseFastHTTP/giant-8                   1.369Gi ±  3%    1.845Gi ± 0%   +34.78% (p=0.000 n=10)
+
+ParseNetUrl/small-8                     86.95Mi ±  3%   141.54Mi ± 3%   +62.79% (p=0.000 n=10)
+ParseNetUrl/medium-8                    174.1Mi ±  2%    283.7Mi ± 2%   +62.91% (p=0.000 n=10)
+ParseNetUrl/large-8                     194.3Mi ±  2%    307.0Mi ± 1%   +58.03% (p=0.000 n=10)
+ParseNetUrl/big-8                       343.4Mi ±  4%    580.6Mi ± 0%   +69.07% (p=0.000 n=10)
+ParseNetUrl/giant-8                     536.0Mi ±  0%    825.4Mi ± 0%   +53.99% (p=0.000 n=10)
+
+ParseUrlvector/small-8                  96.39Mi ±  4%   257.70Mi ± 1%  +167.35% (p=0.000 n=10)
+ParseUrlvector/medium-8                 230.4Mi ±  4%    621.4Mi ± 1%  +169.68% (p=0.000 n=10)
+ParseUrlvector/large-8                  774.0Mi ±  3%   2301.4Mi ± 1%  +197.32% (p=0.000 n=10)
+ParseUrlvector/big-8                    1.274Gi ±  1%    2.878Gi ± 0%  +125.93% (p=0.000 n=10)
+ParseUrlvector/giant-8                  4.245Gi ±  1%   13.631Gi ± 0%  +221.10% (p=0.000 n=10)
