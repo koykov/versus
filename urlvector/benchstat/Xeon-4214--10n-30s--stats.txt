@@ -1,0 +1,20 @@
+goos: linux
+goarch: amd64
+pkg: github.com/koykov/versus/urlvector
+                         │ Xeon-4214--10n-30s--old.txt │      Xeon-4214--10n-30s--new.txt      │
+                         │             B/s             │      B/s       vs base                │
+ParseFastHTTP/small-48                   1.425Gi ± 13%   1.300Gi ± 13%        ~ (p=0.218 n=10)
+ParseFastHTTP/medium-48                  2.083Gi ± 23%   1.887Gi ± 10%        ~ (p=0.165 n=10)
+ParseFastHTTP/large-48                   3.885Gi ± 10%   4.195Gi ± 11%        ~ (p=0.123 n=10)
+ParseFastHTTP/big-48                     6.898Gi ±  3%   6.599Gi ±  7%        ~ (p=0.052 n=10)
+ParseFastHTTP/giant-48                   7.068Gi ±  4%   6.972Gi ±  4%        ~ (p=0.436 n=10)
+ParseNetUrl/small-48                     23.36Mi ±  5%   23.09Mi ±  4%        ~ (p=0.382 n=10)
+ParseNetUrl/medium-48                    55.13Mi ±  9%   57.03Mi ±  5%        ~ (p=0.123 n=10)
+ParseNetUrl/large-48                     113.8Mi ±  4%   114.4Mi ±  3%        ~ (p=0.579 n=10)
+ParseNetUrl/big-48                       152.5Mi ±  3%   154.3Mi ±  3%        ~ (p=0.247 n=10)
+ParseNetUrl/giant-48                     2.237Gi ±  1%   2.242Gi ±  2%        ~ (p=0.684 n=10)
+ParseUrlvector/small-48                  571.1Mi ±  8%   957.3Mi ±  2%  +67.64% (p=0.000 n=10)
+ParseUrlvector/medium-48                 1.340Gi ±  6%   2.245Gi ±  1%  +67.59% (p=0.000 n=10)
+ParseUrlvector/large-48                  4.238Gi ± 16%   8.253Gi ±  7%  +94.72% (p=0.000 n=10)
+ParseUrlvector/big-48                    7.104Gi ±  6%   9.641Gi ±  2%  +35.71% (p=0.000 n=10)
+ParseUrlvector/giant-48                  25.23Gi ± 11%   49.37Gi ±  2%  +95.71% (p=0.000 n=10)
