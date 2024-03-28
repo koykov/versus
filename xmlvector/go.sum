@@ -12,5 +12,5 @@ github.com/koykov/indirect v1.0.0 h1:3kog1xvVUEB2142K2/AZRhnOKN2N8KNahHHkE+KT7ec
 github.com/koykov/indirect v1.0.0/go.mod h1:2qWC0hrIHIexlKaqPA0VWEa0s2V/qxxNJv7XPncnh2I=
 github.com/koykov/vector v1.2.4 h1:1z4DYA3ek16VO83Ogv4TmGWj13RPRtvPlnRF3Gnfkrs=
 github.com/koykov/vector v1.2.4/go.mod h1:taIaBTVvLApbghwTnYu71CQLGLV9i2OhAo48JIr+OJI=
-github.com/koykov/xmlvector v1.0.2 h1:L8as06GJNLqrEl/YvWFj9Hb2IvnGxQrjRw/J3LyPXt8=
-github.com/koykov/xmlvector v1.0.2/go.mod h1:AGwh1vlk9RXM/kSG65ndRgyftfKnYxoJmPWlUkZs8Fc=
+github.com/koykov/xmlvector v1.0.3-0.20240328214439-39d464e36f22 h1:3xIk5Idem/nCilQcr6LtDjT2bVI5vEHjL6LJvzVf+PM=
+github.com/koykov/xmlvector v1.0.3-0.20240328214439-39d464e36f22/go.mod h1:AGwh1vlk9RXM/kSG65ndRgyftfKnYxoJmPWlUkZs8Fc=
