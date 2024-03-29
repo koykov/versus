@@ -5,6 +5,7 @@ go 1.22.0
 require (
 	github.com/koykov/vector v1.2.4
 	github.com/koykov/xmlvector v1.0.3-0.20240328214439-39d464e36f22
+	github.com/subchen/go-xmldom v1.1.2
 	github.com/tamerh/xml-stream-parser v1.5.0
 )
 
