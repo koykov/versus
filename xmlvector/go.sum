@@ -1,3 +1,5 @@
+github.com/antchfx/xpath v1.2.5 h1:hqZ+wtQ+KIOV/S3bGZcIhpgYC26um2bZYP2KVGcR7VY=
+github.com/antchfx/xpath v1.2.5/go.mod h1:i54GszH55fYfBmoZXapTHN8T8tkcHfRgLyVwwqzXNcs=
 github.com/koykov/bitset v1.0.0 h1:2mEbAhKelhpdWqnpa+mR3HRhdMsto5od7ACOi6MIAmk=
 github.com/koykov/bitset v1.0.0/go.mod h1:DVR3bH49c1oOcNtD38h+aQq7lp1ZY91cXmjOldlTk8A=
 github.com/koykov/bytealg v1.0.2 h1:e9le4zkWnK9o1dsjlEtIPjC4JuHof+w0XsyOnYGLOvs=
@@ -14,3 +16,7 @@ github.com/koykov/vector v1.2.4 h1:1z4DYA3ek16VO83Ogv4TmGWj13RPRtvPlnRF3Gnfkrs=
 github.com/koykov/vector v1.2.4/go.mod h1:taIaBTVvLApbghwTnYu71CQLGLV9i2OhAo48JIr+OJI=
 github.com/koykov/xmlvector v1.0.3-0.20240328214439-39d464e36f22 h1:3xIk5Idem/nCilQcr6LtDjT2bVI5vEHjL6LJvzVf+PM=
 github.com/koykov/xmlvector v1.0.3-0.20240328214439-39d464e36f22/go.mod h1:AGwh1vlk9RXM/kSG65ndRgyftfKnYxoJmPWlUkZs8Fc=
+github.com/tamerh/xml-stream-parser v1.5.0 h1:aOb4PX/UgX+rsEXEzOMeP6kNI3yaz0NXvmZ4fS3Y8kQ=
+github.com/tamerh/xml-stream-parser v1.5.0/go.mod h1:U2cbOazFpRFXP3OiVZUbQVOtZ2T1gBKdeHOlEajksgo=
+github.com/tamerh/xpath v1.0.0 h1:NccMES/Ej8slPCFDff73Kf6V1xu9hdbuKf2RyDsxf5Q=
+github.com/tamerh/xpath v1.0.0/go.mod h1:t0wnh72FQlOVEO20f2Dl3EoVxso9GnLREh1WTpvNmJQ=
