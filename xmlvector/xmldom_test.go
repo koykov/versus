@@ -38,7 +38,11 @@ func benchXmlDOM(b *testing.B, s string) {
 	b.SetBytes(int64(len(s)))
 	b.RunParallel(func(pb *testing.PB) {
 		for pb.Next() {
-			doc := xmldom.Must(xmldom.ParseXML(mediumFixture))
+			doc, err := xmldom.ParseXML(s)
+			if err != nil {
+				b.Error()
+				break
+			}
 			root := doc.Root
 			_ = root
 		}
