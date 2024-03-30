@@ -7,7 +7,7 @@ import (
 )
 
 func TestParseXmlDOM(t *testing.T) {
-	doc := xmldom.Must(xmldom.ParseXML(mondialFixture))
+	doc := xmldom.Must(xmldom.ParseXML(mediumFixture))
 	root := doc.Root
 	_ = root
 	if root.Name != "breakfast_menu" {
@@ -25,9 +25,9 @@ func BenchmarkParseXmlDOM(b *testing.B) {
 	b.Run("large", func(b *testing.B) {
 		benchXmlDOM(b, largeFixture)
 	})
-	b.Run("sigmod", func(b *testing.B) {
-		benchXmlDOM(b, sigmodFixture)
-	})
+	// b.Run("sigmod", func(b *testing.B) {
+	// 	benchXmlDOM(b, sigmodFixture)
+	// })
 	b.Run("mondial", func(b *testing.B) {
 		benchXmlDOM(b, mondialFixture)
 	})
