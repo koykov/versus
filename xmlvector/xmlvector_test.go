@@ -49,7 +49,7 @@ func benchXmlvector(b *testing.B, s string) {
 			if v.Type() != vector.TypeObj {
 				panic(fmt.Errorf("unexpected value type; got %d; want %d", v.Type(), vector.TypeObj))
 			}
-			xmlvector.Release(p)
+			xmlvector.ReleaseNC(p)
 		}
 	})
 }
