@@ -21,8 +21,8 @@ github.com/koykov/openrt v0.0.0-20240220213454-7b5b4e8c30a5 h1:Gf4EYzitGI5RjjRKT
 github.com/koykov/openrt v0.0.0-20240220213454-7b5b4e8c30a5/go.mod h1:y8Xa99HTBmthCilUUW36IZJd5SP9Rb+W8S9CJaauyU8=
 github.com/koykov/vector v1.2.5-0.20240314214600-a5f862dc67a5 h1:alTWbXR3s2qXoTfm4CNgxecSPoEq8M2iuK7oRfDihyQ=
 github.com/koykov/vector v1.2.5-0.20240314214600-a5f862dc67a5/go.mod h1:OWPlh9ZRUtev6kfzYwL0FnchYXdNcir4EYl+bwngQls=
-github.com/koykov/xmlvector v1.0.3-0.20240331204947-ec0b70a52060 h1:C8RaG/ijnrylVFMh7W6YiDu1SuPiFYQ+rh+1hMfFvNk=
-github.com/koykov/xmlvector v1.0.3-0.20240331204947-ec0b70a52060/go.mod h1:c6tNOJHgtz2ZfO4DtsUL2fELulAlg48GqZnl9vEJvVo=
+github.com/koykov/xmlvector v1.0.3-0.20240404155920-1818e3ed1e03 h1:So64UMhEYCsTKh24mfAwvmL2oeLvzqaNv1Br1BG/TWA=
+github.com/koykov/xmlvector v1.0.3-0.20240404155920-1818e3ed1e03/go.mod h1:c6tNOJHgtz2ZfO4DtsUL2fELulAlg48GqZnl9vEJvVo=
 github.com/subchen/go-xmldom v1.1.2 h1:7evI2YqfYYOnuj+PBwyaOZZYjl3iWq35P6KfBUw9jeU=
 github.com/subchen/go-xmldom v1.1.2/go.mod h1:6Pg/HuX5/T4Jlj0IPJF1sRxKVoI/rrKP6LIMge9d5/8=
 github.com/tamerh/xml-stream-parser v1.5.0 h1:aOb4PX/UgX+rsEXEzOMeP6kNI3yaz0NXvmZ4fS3Y8kQ=
