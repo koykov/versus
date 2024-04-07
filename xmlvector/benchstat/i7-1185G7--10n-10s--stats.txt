@@ -1,0 +1,79 @@
+goos: linux
+goarch: amd64
+pkg: github.com/koykov/versus/xmlvector
+cpu: 11th Gen Intel(R) Core(TM) i7-1185G7 @ 3.00GHz
+                               │ i7-1185G7--10n-10s--old.txt │     i7-1185G7--10n-10s--new.txt     │
+                               │           sec/op            │   sec/op     vs base                │
+ParseXmlDOM/small-8                              1.995µ ± 2%   2.058µ ± 1%   +3.16% (p=0.003 n=10)
+ParseXmlDOM/medium-8                             10.59µ ± 0%   10.75µ ± 5%   +1.49% (p=0.000 n=10)
+ParseXmlDOM/large-8                              88.69µ ± 1%   90.20µ ± 1%   +1.71% (p=0.000 n=10)
+ParseXmlDOM/mondial-8                            17.02m ± 1%   17.24m ± 1%   +1.29% (p=0.000 n=10)
+ParseXmlStreamParser/small-8                     2.065µ ± 2%   2.046µ ± 3%        ~ (p=0.218 n=10)
+ParseXmlStreamParser/medium-8                    6.030µ ± 1%   6.007µ ± 1%        ~ (p=0.424 n=10)
+ParseXmlStreamParser/large-8                     42.62µ ± 3%   42.89µ ± 2%        ~ (p=0.089 n=10)
+ParseXmlStreamParser/sigmod-8                    2.896m ± 2%   3.033m ± 4%   +4.72% (p=0.000 n=10)
+ParseXmlStreamParser/mondial-8                   7.648m ± 3%   7.786m ± 2%        ~ (p=0.123 n=10)
+ParseXmlvector/small-8                           334.6n ± 0%   291.9n ± 7%  -12.75% (p=0.000 n=10)
+ParseXmlvector/medium-8                          1.488µ ± 0%   1.239µ ± 0%  -16.77% (p=0.000 n=10)
+ParseXmlvector/large-8                           13.26µ ± 0%   11.52µ ± 2%  -13.10% (p=0.000 n=10)
+ParseXmlvector/sigmod-8                          886.4µ ± 5%   706.1µ ± 1%  -20.34% (p=0.000 n=10)
+ParseXmlvector/mondial-8                         3.395m ± 3%   2.166m ± 1%  -36.20% (p=0.000 n=10)
+geomean                                          59.78µ        55.64µ        -6.92%
+
+                               │ i7-1185G7--10n-10s--old.txt │     i7-1185G7--10n-10s--new.txt      │
+                               │             B/s             │     B/s       vs base                │
+ParseXmlDOM/small-8                             76.96Mi ± 2%   74.61Mi ± 1%   -3.05% (p=0.003 n=10)
+ParseXmlDOM/medium-8                            96.34Mi ± 0%   94.92Mi ± 4%   -1.47% (p=0.000 n=10)
+ParseXmlDOM/large-8                             77.70Mi ± 1%   76.40Mi ± 1%   -1.67% (p=0.000 n=10)
+ParseXmlDOM/mondial-8                           84.78Mi ± 1%   83.70Mi ± 1%   -1.27% (p=0.000 n=10)
+ParseXmlStreamParser/small-8                    74.34Mi ± 2%   75.05Mi ± 3%        ~ (p=0.218 n=10)
+ParseXmlStreamParser/medium-8                   169.2Mi ± 1%   169.9Mi ± 1%        ~ (p=0.436 n=10)
+ParseXmlStreamParser/large-8                    161.7Mi ± 3%   160.7Mi ± 2%        ~ (p=0.089 n=10)
+ParseXmlStreamParser/sigmod-8                   158.9Mi ± 2%   151.8Mi ± 3%   -4.51% (p=0.000 n=10)
+ParseXmlStreamParser/mondial-8                  188.7Mi ± 3%   185.4Mi ± 2%        ~ (p=0.123 n=10)
+ParseXmlvector/small-8                          458.9Mi ± 0%   526.0Mi ± 7%  +14.62% (p=0.000 n=10)
+ParseXmlvector/medium-8                         685.6Mi ± 0%   824.0Mi ± 0%  +20.19% (p=0.000 n=10)
+ParseXmlvector/large-8                          519.9Mi ± 0%   598.2Mi ± 2%  +15.08% (p=0.000 n=10)
+ParseXmlvector/sigmod-8                         519.2Mi ± 5%   651.8Mi ± 1%  +25.54% (p=0.000 n=10)
+ParseXmlvector/mondial-8                        425.1Mi ± 3%   666.4Mi ± 1%  +56.75% (p=0.000 n=10)
+geomean                                         194.1Mi        208.5Mi        +7.44%
+
+                               │ i7-1185G7--10n-10s--old.txt │       i7-1185G7--10n-10s--new.txt       │
+                               │            B/op             │      B/op       vs base                 │
+ParseXmlDOM/small-8                         2.602Ki ±   0%     2.602Ki ±   0%       ~ (p=1.000 n=10)
+ParseXmlDOM/medium-8                        10.93Ki ±   0%     10.93Ki ±   0%       ~ (p=0.350 n=10)
+ParseXmlDOM/large-8                         95.16Ki ±   0%     95.16Ki ±   0%       ~ (p=1.000 n=10)
+ParseXmlDOM/mondial-8                       14.80Mi ±   0%     14.80Mi ±   0%       ~ (p=0.529 n=10)
+ParseXmlStreamParser/small-8                6.688Ki ±   0%     6.688Ki ±   0%       ~ (p=1.000 n=10) ¹
+ParseXmlStreamParser/medium-8               15.02Ki ±   0%     15.02Ki ±   0%       ~ (p=1.000 n=10) ¹
+ParseXmlStreamParser/large-8                98.35Ki ±   0%     98.35Ki ±   0%       ~ (p=1.000 n=10)
+ParseXmlStreamParser/sigmod-8               7.235Mi ±   0%     7.235Mi ±   0%       ~ (p=0.143 n=10)
+ParseXmlStreamParser/mondial-8              15.94Mi ±   0%     15.94Mi ±   0%       ~ (p=0.075 n=10)
+ParseXmlvector/small-8                        0.000 ±   0%       0.000 ±   0%       ~ (p=1.000 n=10) ¹
+ParseXmlvector/medium-8                       0.000 ±   0%       0.000 ±   0%       ~ (p=1.000 n=10) ¹
+ParseXmlvector/large-8                        0.000 ±   0%       0.000 ±   0%       ~ (p=1.000 n=10) ¹
+ParseXmlvector/sigmod-8                       1.500 ±    ?       1.000 ±    ?       ~ (p=0.778 n=10)
+ParseXmlvector/mondial-8                      10.00 ± 260%       11.00 ± 227%       ~ (p=0.644 n=10)
+geomean                                                    ²                   -2.19%                ²
+¹ all samples are equal
+² summaries must be >0 to compute geomean
+
+                               │ i7-1185G7--10n-10s--old.txt │     i7-1185G7--10n-10s--new.txt      │
+                               │          allocs/op          │  allocs/op   vs base                 │
+ParseXmlDOM/small-8                             67.00 ± 0%      67.00 ± 0%       ~ (p=1.000 n=10) ¹
+ParseXmlDOM/medium-8                            291.0 ± 0%      291.0 ± 0%       ~ (p=1.000 n=10) ¹
+ParseXmlDOM/large-8                            2.634k ± 0%     2.634k ± 0%       ~ (p=1.000 n=10) ¹
+ParseXmlDOM/mondial-8                          425.4k ± 0%     425.4k ± 0%       ~ (p=1.000 n=10) ¹
+ParseXmlStreamParser/small-8                    37.00 ± 0%      37.00 ± 0%       ~ (p=1.000 n=10) ¹
+ParseXmlStreamParser/medium-8                   141.0 ± 0%      141.0 ± 0%       ~ (p=1.000 n=10) ¹
+ParseXmlStreamParser/large-8                   1.249k ± 0%     1.249k ± 0%       ~ (p=1.000 n=10) ¹
+ParseXmlStreamParser/sigmod-8                  73.67k ± 0%     73.67k ± 0%       ~ (p=1.000 n=10) ¹
+ParseXmlStreamParser/mondial-8                 218.3k ± 0%     218.3k ± 0%       ~ (p=1.000 n=10)
+ParseXmlvector/small-8                          0.000 ± 0%      0.000 ± 0%       ~ (p=1.000 n=10) ¹
+ParseXmlvector/medium-8                         0.000 ± 0%      0.000 ± 0%       ~ (p=1.000 n=10) ¹
+ParseXmlvector/large-8                          0.000 ± 0%      0.000 ± 0%       ~ (p=1.000 n=10) ¹
+ParseXmlvector/sigmod-8                         0.000 ± 0%      0.000 ± 0%       ~ (p=1.000 n=10) ¹
+ParseXmlvector/mondial-8                        0.000 ± 0%      0.000 ± 0%       ~ (p=1.000 n=10) ¹
+geomean                                                    ²                +0.00%                ²
+¹ all samples are equal
+² summaries must be >0 to compute geomean
