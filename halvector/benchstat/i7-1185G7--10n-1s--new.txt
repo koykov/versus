@@ -1,0 +1,36 @@
+goos: linux
+goarch: amd64
+pkg: github.com/koykov/versus/halvector
+cpu: 11th Gen Intel(R) Core(TM) i7-1185G7 @ 3.00GHz
+BenchmarkParseHalvector/small-8         	32089135	        36.82 ns/op	 298.74 MB/s	       0 B/op	       0 allocs/op
+BenchmarkParseHalvector/small-8         	32927587	        37.07 ns/op	 296.77 MB/s	       0 B/op	       0 allocs/op
+BenchmarkParseHalvector/small-8         	32963631	        36.14 ns/op	 304.41 MB/s	       0 B/op	       0 allocs/op
+BenchmarkParseHalvector/small-8         	32581434	        36.71 ns/op	 299.67 MB/s	       0 B/op	       0 allocs/op
+BenchmarkParseHalvector/small-8         	32364190	        36.95 ns/op	 297.69 MB/s	       0 B/op	       0 allocs/op
+BenchmarkParseHalvector/small-8         	32999934	        34.23 ns/op	 321.37 MB/s	       0 B/op	       0 allocs/op
+BenchmarkParseHalvector/small-8         	32254761	        38.02 ns/op	 289.34 MB/s	       0 B/op	       0 allocs/op
+BenchmarkParseHalvector/small-8         	35185923	        33.91 ns/op	 324.34 MB/s	       0 B/op	       0 allocs/op
+BenchmarkParseHalvector/small-8         	34080777	        34.71 ns/op	 316.90 MB/s	       0 B/op	       0 allocs/op
+BenchmarkParseHalvector/small-8         	34151640	        35.92 ns/op	 306.23 MB/s	       0 B/op	       0 allocs/op
+BenchmarkParseHalvector/medium-8        	11247258	       107.5 ns/op	 465.19 MB/s	       0 B/op	       0 allocs/op
+BenchmarkParseHalvector/medium-8        	11168018	       107.4 ns/op	 465.57 MB/s	       0 B/op	       0 allocs/op
+BenchmarkParseHalvector/medium-8        	11236270	       107.1 ns/op	 466.84 MB/s	       0 B/op	       0 allocs/op
+BenchmarkParseHalvector/medium-8        	11121518	       108.2 ns/op	 461.97 MB/s	       0 B/op	       0 allocs/op
+BenchmarkParseHalvector/medium-8        	11145586	       107.9 ns/op	 463.56 MB/s	       0 B/op	       0 allocs/op
+BenchmarkParseHalvector/medium-8        	11114409	       108.7 ns/op	 459.86 MB/s	       0 B/op	       0 allocs/op
+BenchmarkParseHalvector/medium-8        	11009845	       108.2 ns/op	 462.15 MB/s	       0 B/op	       0 allocs/op
+BenchmarkParseHalvector/medium-8        	11142384	       107.6 ns/op	 464.74 MB/s	       0 B/op	       0 allocs/op
+BenchmarkParseHalvector/medium-8        	11205943	       107.8 ns/op	 463.97 MB/s	       0 B/op	       0 allocs/op
+BenchmarkParseHalvector/medium-8        	11099394	       107.8 ns/op	 463.94 MB/s	       0 B/op	       0 allocs/op
+BenchmarkParseHalvector/large-8         	  407929	      2904 ns/op	 549.95 MB/s	       0 B/op	       0 allocs/op
+BenchmarkParseHalvector/large-8         	  411412	      2908 ns/op	 549.23 MB/s	       0 B/op	       0 allocs/op
+BenchmarkParseHalvector/large-8         	  413582	      2926 ns/op	 545.71 MB/s	       0 B/op	       0 allocs/op
+BenchmarkParseHalvector/large-8         	  405846	      2943 ns/op	 542.72 MB/s	       0 B/op	       0 allocs/op
+BenchmarkParseHalvector/large-8         	  409513	      2902 ns/op	 550.40 MB/s	       0 B/op	       0 allocs/op
+BenchmarkParseHalvector/large-8         	  395622	      2900 ns/op	 550.62 MB/s	       0 B/op	       0 allocs/op
+BenchmarkParseHalvector/large-8         	  409590	      2900 ns/op	 550.74 MB/s	       0 B/op	       0 allocs/op
+BenchmarkParseHalvector/large-8         	  377042	      2953 ns/op	 540.87 MB/s	       0 B/op	       0 allocs/op
+BenchmarkParseHalvector/large-8         	  413581	      2905 ns/op	 549.83 MB/s	       0 B/op	       0 allocs/op
+BenchmarkParseHalvector/large-8         	  408525	      2905 ns/op	 549.68 MB/s	       0 B/op	       0 allocs/op
+PASS
+ok  	github.com/koykov/versus/halvector	37.778s
