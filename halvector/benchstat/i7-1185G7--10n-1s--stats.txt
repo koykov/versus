@@ -1,0 +1,35 @@
+goos: linux
+goarch: amd64
+pkg: github.com/koykov/versus/halvector
+cpu: 11th Gen Intel(R) Core(TM) i7-1185G7 @ 3.00GHz
+                        │ i7-1185G7--10n-1s--old.txt │     i7-1185G7--10n-1s--new.txt      │
+                        │           sec/op           │   sec/op     vs base                │
+ParseHalvector/small-8                   63.16n ± 4%   36.43n ± 6%  -42.33% (p=0.000 n=10)
+ParseHalvector/medium-8                  188.0n ± 2%   107.8n ± 0%  -42.66% (p=0.000 n=10)
+ParseHalvector/large-8                   5.964µ ± 1%   2.905µ ± 1%  -51.29% (p=0.000 n=10)
+geomean                                  413.7n        225.1n       -45.59%
+
+                        │ i7-1185G7--10n-1s--old.txt │      i7-1185G7--10n-1s--new.txt       │
+                        │            B/s             │     B/s       vs base                 │
+ParseHalvector/small-8                  166.1Mi ± 4%   288.0Mi ± 6%   +73.42% (p=0.000 n=10)
+ParseHalvector/medium-8                 253.6Mi ± 2%   442.5Mi ± 0%   +74.45% (p=0.000 n=10)
+ParseHalvector/large-8                  255.4Mi ± 1%   524.3Mi ± 1%  +105.30% (p=0.000 n=10)
+geomean                                 220.8Mi        405.8Mi        +83.82%
+
+                        │ i7-1185G7--10n-1s--old.txt │     i7-1185G7--10n-1s--new.txt      │
+                        │            B/op            │    B/op     vs base                 │
+ParseHalvector/small-8                  0.000 ± 0%     0.000 ± 0%       ~ (p=1.000 n=10) ¹
+ParseHalvector/medium-8                 0.000 ± 0%     0.000 ± 0%       ~ (p=1.000 n=10) ¹
+ParseHalvector/large-8                  0.000 ±  ?     0.000 ± 0%       ~ (p=0.474 n=10)
+geomean                                            ²               +0.00%                ²
+¹ all samples are equal
+² summaries must be >0 to compute geomean
+
+                        │ i7-1185G7--10n-1s--old.txt │     i7-1185G7--10n-1s--new.txt      │
+                        │         allocs/op          │ allocs/op   vs base                 │
+ParseHalvector/small-8                  0.000 ± 0%     0.000 ± 0%       ~ (p=1.000 n=10) ¹
+ParseHalvector/medium-8                 0.000 ± 0%     0.000 ± 0%       ~ (p=1.000 n=10) ¹
+ParseHalvector/large-8                  0.000 ± 0%     0.000 ± 0%       ~ (p=1.000 n=10) ¹
+geomean                                            ²               +0.00%                ²
+¹ all samples are equal
+² summaries must be >0 to compute geomean
