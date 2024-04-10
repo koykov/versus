@@ -1,0 +1,36 @@
+goos: linux
+goarch: amd64
+pkg: github.com/koykov/versus/halvector
+cpu: Intel(R) Xeon(R) Silver 4214 CPU @ 2.20GHz
+BenchmarkParseHalvector/small-48                57483874                20.54 ns/op      535.46 MB/s           0 B/op          0 allocs/op
+BenchmarkParseHalvector/small-48                56275436                21.73 ns/op      506.13 MB/s           0 B/op          0 allocs/op
+BenchmarkParseHalvector/small-48                62790486                19.54 ns/op      563.09 MB/s           0 B/op          0 allocs/op
+BenchmarkParseHalvector/small-48                62926311                19.20 ns/op      572.78 MB/s           0 B/op          0 allocs/op
+BenchmarkParseHalvector/small-48                64396580                19.28 ns/op      570.43 MB/s           0 B/op          0 allocs/op
+BenchmarkParseHalvector/small-48                62190618                18.84 ns/op      583.90 MB/s           0 B/op          0 allocs/op
+BenchmarkParseHalvector/small-48                63029280                19.00 ns/op      578.82 MB/s           0 B/op          0 allocs/op
+BenchmarkParseHalvector/small-48                58185494                20.59 ns/op      534.36 MB/s           0 B/op          0 allocs/op
+BenchmarkParseHalvector/small-48                55495519                22.65 ns/op      485.58 MB/s           0 B/op          0 allocs/op
+BenchmarkParseHalvector/small-48                64343463                19.44 ns/op      565.70 MB/s           0 B/op          0 allocs/op
+BenchmarkParseHalvector/medium-48               22443055                54.54 ns/op      916.70 MB/s           0 B/op          0 allocs/op
+BenchmarkParseHalvector/medium-48               22787449                54.51 ns/op      917.20 MB/s           0 B/op          0 allocs/op
+BenchmarkParseHalvector/medium-48               20759320                55.98 ns/op      893.19 MB/s           0 B/op          0 allocs/op
+BenchmarkParseHalvector/medium-48               18462385                54.44 ns/op      918.50 MB/s           0 B/op          0 allocs/op
+BenchmarkParseHalvector/medium-48               23036204                50.93 ns/op      981.72 MB/s           0 B/op          0 allocs/op
+BenchmarkParseHalvector/medium-48               23169430                52.17 ns/op      958.33 MB/s           0 B/op          0 allocs/op
+BenchmarkParseHalvector/medium-48               24027192                53.72 ns/op      930.81 MB/s           0 B/op          0 allocs/op
+BenchmarkParseHalvector/medium-48               22607736                52.74 ns/op      947.97 MB/s           0 B/op          0 allocs/op
+BenchmarkParseHalvector/medium-48               24564357                50.36 ns/op      992.79 MB/s           0 B/op          0 allocs/op
+BenchmarkParseHalvector/medium-48               23469679                50.74 ns/op      985.41 MB/s           0 B/op          0 allocs/op
+BenchmarkParseHalvector/large-48                  684903              1665 ns/op         959.42 MB/s           1 B/op          0 allocs/op
+BenchmarkParseHalvector/large-48                  755149              1651 ns/op         967.05 MB/s           0 B/op          0 allocs/op
+BenchmarkParseHalvector/large-48                  701484              1740 ns/op         917.83 MB/s          19 B/op          0 allocs/op
+BenchmarkParseHalvector/large-48                  741591              1624 ns/op         983.32 MB/s           0 B/op          0 allocs/op
+BenchmarkParseHalvector/large-48                  729039              1621 ns/op         985.13 MB/s           0 B/op          0 allocs/op
+BenchmarkParseHalvector/large-48                  731374              1588 ns/op        1005.89 MB/s           0 B/op          0 allocs/op
+BenchmarkParseHalvector/large-48                  734200              1722 ns/op         927.55 MB/s           0 B/op          0 allocs/op
+BenchmarkParseHalvector/large-48                  705079              1693 ns/op         943.22 MB/s           0 B/op          0 allocs/op
+BenchmarkParseHalvector/large-48                  642835              1854 ns/op         861.46 MB/s           0 B/op          0 allocs/op
+BenchmarkParseHalvector/large-48                  714879              1660 ns/op         962.17 MB/s           0 B/op          0 allocs/op
+PASS
+ok      github.com/koykov/versus/halvector      57.253s

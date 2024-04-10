@@ -43,7 +43,7 @@ func benchHalvector(b *testing.B, s string) {
 			if v.Type() != vector.TypeArr {
 				panic(fmt.Errorf("unexpected value type; got %d; want %d", v.Type(), vector.TypeObj))
 			}
-			halvector.Release(p)
+			halvector.ReleaseNC(p)
 		}
 	})
 }
