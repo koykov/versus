@@ -50,9 +50,12 @@ func (i3 TInspector) GetTo(src any, buf *any, path ...string) (err error) {
 
 	if len(path) > 0 {
 		if path[0] == "L1" {
-			x0 := &x.L1
+			x0 := x.L1
 			_ = x0
 			if len(path) > 1 {
+				if x0 == nil {
+					return
+				}
 				if path[1] == "L2" {
 					x1 := x0.L2
 					_ = x1
@@ -61,9 +64,12 @@ func (i3 TInspector) GetTo(src any, buf *any, path ...string) (err error) {
 							return
 						}
 						if path[2] == "L3" {
-							x2 := &x1.L3
+							x2 := x1.L3
 							_ = x2
 							if len(path) > 3 {
+								if x2 == nil {
+									return
+								}
 								if path[3] == "S" {
 									*buf = &x2.S
 									return
@@ -113,9 +119,20 @@ func (i3 TInspector) Compare(src any, cond inspector.Op, right string, result *b
 
 	if len(path) > 0 {
 		if path[0] == "L1" {
-			x0 := &x.L1
+			x0 := x.L1
 			_ = x0
+			if right == inspector.Nil {
+				if cond == inspector.OpEq {
+					*result = x0 == nil
+				} else {
+					*result = x0 != nil
+				}
+				return
+			}
 			if len(path) > 1 {
+				if x0 == nil {
+					return
+				}
 				if path[1] == "L2" {
 					x1 := x0.L2
 					_ = x1
@@ -132,9 +149,20 @@ func (i3 TInspector) Compare(src any, cond inspector.Op, right string, result *b
 							return
 						}
 						if path[2] == "L3" {
-							x2 := &x1.L3
+							x2 := x1.L3
 							_ = x2
+							if right == inspector.Nil {
+								if cond == inspector.OpEq {
+									*result = x2 == nil
+								} else {
+									*result = x2 != nil
+								}
+								return
+							}
 							if len(path) > 3 {
+								if x2 == nil {
+									return
+								}
 								if path[3] == "S" {
 									var rightExact string
 									rightExact = right
@@ -232,9 +260,12 @@ func (i3 TInspector) Loop(src any, l inspector.Iterator, buf *[]byte, path ...st
 
 	if len(path) > 0 {
 		if path[0] == "L1" {
-			x0 := &x.L1
+			x0 := x.L1
 			_ = x0
 			if len(path) > 1 {
+				if x0 == nil {
+					return
+				}
 				if path[1] == "L2" {
 					x1 := x0.L2
 					_ = x1
@@ -243,9 +274,12 @@ func (i3 TInspector) Loop(src any, l inspector.Iterator, buf *[]byte, path ...st
 							return
 						}
 						if path[2] == "L3" {
-							x2 := &x1.L3
+							x2 := x1.L3
 							_ = x2
 							if len(path) > 3 {
+								if x2 == nil {
+									return
+								}
 							}
 						}
 					}
@@ -277,12 +311,19 @@ func (i3 TInspector) SetWithBuffer(dst, value any, buf inspector.AccumulativeBuf
 
 	if len(path) > 0 {
 		if path[0] == "L1" {
-			x0 := &x.L1
+			x0 := x.L1
 			if uvalue, ok := value.(*inspector2.L1); ok {
 				x0 = uvalue
 			}
+			if x0 == nil {
+				x0 = &inspector2.L1{}
+				x.L1 = x0
+			}
 			_ = x0
 			if len(path) > 1 {
+				if x0 == nil {
+					return nil
+				}
 				if path[1] == "L2" {
 					x1 := x0.L2
 					if uvalue, ok := value.(*inspector2.L2); ok {
@@ -298,12 +339,19 @@ func (i3 TInspector) SetWithBuffer(dst, value any, buf inspector.AccumulativeBuf
 							return nil
 						}
 						if path[2] == "L3" {
-							x2 := &x1.L3
+							x2 := x1.L3
 							if uvalue, ok := value.(*inspector2.L3); ok {
 								x2 = uvalue
 							}
+							if x2 == nil {
+								x2 = &inspector2.L3{}
+								x1.L3 = x2
+							}
 							_ = x2
 							if len(path) > 3 {
+								if x2 == nil {
+									return nil
+								}
 								if path[3] == "S" {
 									inspector.AssignBuf(&x2.S, value, buf)
 									return nil
@@ -317,13 +365,13 @@ func (i3 TInspector) SetWithBuffer(dst, value any, buf inspector.AccumulativeBuf
 									return nil
 								}
 							}
-							x1.L3 = *x2
+							x1.L3 = x2
 						}
 					}
 					x0.L2 = x1
 				}
 			}
-			x.L1 = *x0
+			x.L1 = x0
 		}
 	}
 	return nil
@@ -370,27 +418,37 @@ func (i3 TInspector) DeepEqualWithOptions(l, r any, opts *inspector.DEQOptions) 
 	lx1 := lx.L1
 	rx1 := rx.L1
 	_, _ = lx1, rx1
-	if inspector.DEQMustCheck("L1", opts) {
-		lx2 := lx1.L2
-		rx2 := rx1.L2
-		_, _ = lx2, rx2
-		if (lx2 == nil && rx2 != nil) || (lx2 != nil && rx2 == nil) {
-			return false
-		}
-		if lx2 != nil && rx2 != nil {
-			if inspector.DEQMustCheck("L1.L2", opts) {
-				lx3 := lx2.L3
-				rx3 := rx2.L3
-				_, _ = lx3, rx3
-				if inspector.DEQMustCheck("L1.L2.L3", opts) {
-					if lx3.S != rx3.S && inspector.DEQMustCheck("L1.L2.L3.S", opts) {
+	if (lx1 == nil && rx1 != nil) || (lx1 != nil && rx1 == nil) {
+		return false
+	}
+	if lx1 != nil && rx1 != nil {
+		if inspector.DEQMustCheck("L1", opts) {
+			lx2 := lx1.L2
+			rx2 := rx1.L2
+			_, _ = lx2, rx2
+			if (lx2 == nil && rx2 != nil) || (lx2 != nil && rx2 == nil) {
+				return false
+			}
+			if lx2 != nil && rx2 != nil {
+				if inspector.DEQMustCheck("L1.L2", opts) {
+					lx3 := lx2.L3
+					rx3 := rx2.L3
+					_, _ = lx3, rx3
+					if (lx3 == nil && rx3 != nil) || (lx3 != nil && rx3 == nil) {
 						return false
 					}
-					if lx3.I != rx3.I && inspector.DEQMustCheck("L1.L2.L3.I", opts) {
-						return false
-					}
-					if !inspector.EqualFloat64(lx3.F, rx3.F, opts) && inspector.DEQMustCheck("L1.L2.L3.F", opts) {
-						return false
+					if lx3 != nil && rx3 != nil {
+						if inspector.DEQMustCheck("L1.L2.L3", opts) {
+							if lx3.S != rx3.S && inspector.DEQMustCheck("L1.L2.L3.S", opts) {
+								return false
+							}
+							if lx3.I != rx3.I && inspector.DEQMustCheck("L1.L2.L3.I", opts) {
+								return false
+							}
+							if !inspector.EqualFloat64(lx3.F, rx3.F, opts) && inspector.DEQMustCheck("L1.L2.L3.F", opts) {
+								return false
+							}
+						}
 					}
 				}
 			}
@@ -461,20 +519,34 @@ func (i3 TInspector) CopyTo(src, dst any, buf inspector.AccumulativeBuffer) erro
 }
 
 func (i3 TInspector) countBytes(x *inspector2.T) (c int) {
-	if x.L1.L2 != nil {
-		c += len(x.L1.L2.L3.S)
+	if x.L1 != nil {
+		if x.L1.L2 != nil {
+			if x.L1.L2.L3 != nil {
+				c += len(x.L1.L2.L3.S)
+			}
+		}
 	}
 	return c
 }
 
 func (i3 TInspector) cpy(buf []byte, l, r *inspector2.T) ([]byte, error) {
-	if r.L1.L2 != nil {
-		if l.L1.L2 == nil {
-			l.L1.L2 = &inspector2.L2{}
+	if r.L1 != nil {
+		if l.L1 == nil {
+			l.L1 = &inspector2.L1{}
 		}
-		buf, l.L1.L2.L3.S = inspector.BufferizeString(buf, r.L1.L2.L3.S)
-		l.L1.L2.L3.I = r.L1.L2.L3.I
-		l.L1.L2.L3.F = r.L1.L2.L3.F
+		if r.L1.L2 != nil {
+			if l.L1.L2 == nil {
+				l.L1.L2 = &inspector2.L2{}
+			}
+			if r.L1.L2.L3 != nil {
+				if l.L1.L2.L3 == nil {
+					l.L1.L2.L3 = &inspector2.L3{}
+				}
+				buf, l.L1.L2.L3.S = inspector.BufferizeString(buf, r.L1.L2.L3.S)
+				l.L1.L2.L3.I = r.L1.L2.L3.I
+				l.L1.L2.L3.F = r.L1.L2.L3.F
+			}
+		}
 	}
 	return buf, nil
 }
@@ -500,15 +572,25 @@ func (i3 TInspector) Length(src any, result *int, path ...string) error {
 		return nil
 	}
 	if path[0] == "L1" {
-		if path[1] == "L2" {
-			if x.L1.L2 != nil {
-				if x.L1.L2 == nil {
-					return nil
-				}
-				if path[2] == "L3" {
-					if path[3] == "S" {
-						*result = len(x.L1.L2.L3.S)
+		if x.L1 != nil {
+			if x.L1 == nil {
+				return nil
+			}
+			if path[1] == "L2" {
+				if x.L1.L2 != nil {
+					if x.L1.L2 == nil {
 						return nil
+					}
+					if path[2] == "L3" {
+						if x.L1.L2.L3 != nil {
+							if x.L1.L2.L3 == nil {
+								return nil
+							}
+							if path[3] == "S" {
+								*result = len(x.L1.L2.L3.S)
+								return nil
+							}
+						}
 					}
 				}
 			}
@@ -538,13 +620,23 @@ func (i3 TInspector) Capacity(src any, result *int, path ...string) error {
 		return nil
 	}
 	if path[0] == "L1" {
-		if path[1] == "L2" {
-			if x.L1.L2 != nil {
-				if x.L1.L2 == nil {
-					return nil
-				}
-				if path[2] == "L3" {
-					if path[3] == "S" {
+		if x.L1 != nil {
+			if x.L1 == nil {
+				return nil
+			}
+			if path[1] == "L2" {
+				if x.L1.L2 != nil {
+					if x.L1.L2 == nil {
+						return nil
+					}
+					if path[2] == "L3" {
+						if x.L1.L2.L3 != nil {
+							if x.L1.L2.L3 == nil {
+								return nil
+							}
+							if path[3] == "S" {
+							}
+						}
 					}
 				}
 			}
@@ -566,10 +658,14 @@ func (i3 TInspector) Reset(x any) error {
 	default:
 		return inspector.ErrUnsupportedType
 	}
-	if origin.L1.L2 != nil {
-		origin.L1.L2.L3.S = ""
-		origin.L1.L2.L3.I = 0
-		origin.L1.L2.L3.F = 0
+	if origin.L1 != nil {
+		if origin.L1.L2 != nil {
+			if origin.L1.L2.L3 != nil {
+				origin.L1.L2.L3.S = ""
+				origin.L1.L2.L3.I = 0
+				origin.L1.L2.L3.F = 0
+			}
+		}
 	}
 	return nil
 }

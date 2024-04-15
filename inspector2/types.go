@@ -1,7 +1,7 @@
 package inspector2
 
 type T struct {
-	L1 L1
+	L1 *L1
 }
 
 type L1 struct {
@@ -9,7 +9,7 @@ type L1 struct {
 }
 
 type L2 struct {
-	L3 L3
+	L3 *L3
 }
 
 type L3 struct {
