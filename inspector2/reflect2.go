@@ -7,10 +7,10 @@ func diveReflect2(node any, path ...string) any {
 		return node
 	}
 	typ := reflect2.TypeOf(node)
-	dec := getDecoderR2(typ)
+	dec := getReaderR2(typ)
 	ptr := reflect2.PtrOf(node)
-	if ptr == nil {
+	if ptr == nil || dec == nil {
 		return nil
 	}
-	return dec.Decode(ptr, path...)
+	return dec.Read(ptr, path...)
 }

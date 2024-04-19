@@ -7,55 +7,54 @@ import (
 	"github.com/modern-go/reflect2"
 )
 
-type decR2 interface {
-	Decode(ptr unsafe.Pointer, path ...string) any
+type readerR2 interface {
+	Read(ptr unsafe.Pointer, path ...string) any
 }
 
-func getDecoderR2(typ reflect2.Type) decR2 {
+func getReaderR2(typ reflect2.Type) readerR2 {
 	ptrType := typ.(*reflect2.UnsafePtrType)
-	decoder := decoderOfType(ptrType.Elem())
+	decoder := readerOfType(ptrType.Elem())
 	return decoder
 }
 
-func decoderOfType(typ reflect2.Type) decR2 {
+func readerOfType(typ reflect2.Type) readerR2 {
 	ifaceType, isIFace := typ.(*reflect2.UnsafeIFaceType)
 	if isIFace {
-		return &ifaceDecoder{valType: ifaceType}
+		return &ifaceReaderR2{valType: ifaceType}
 	}
-	return &efaceDecoder{}
+	return &efaceReaderR2{}
 }
 
-type ifaceDecoder struct {
+type ifaceReaderR2 struct {
 	valType *reflect2.UnsafeIFaceType
 }
 
-func (decoder *ifaceDecoder) Decode(ptr unsafe.Pointer, path ...string) {
-	if iter.ReadNil() {
-		decoder.valType.UnsafeSet(ptr, decoder.valType.UnsafeNew())
-		return
-	}
-	obj := decoder.valType.UnsafeIndirect(ptr)
+func (rdr *ifaceReaderR2) Read(ptr unsafe.Pointer, path ...string) any {
+	obj := rdr.valType.UnsafeIndirect(ptr)
 	if reflect2.IsNil(obj) {
-		iter.ReportError("decode non empty interface", "can not unmarshal into nil")
-		return
+		return nil
 	}
-	iter.ReadVal(obj)
+	if len(path) == 0 {
+		return obj
+	}
+	diveReflect2(obj, path[1:]...)
+	return obj
 }
 
-type efaceDecoder struct {
+type efaceReaderR2 struct {
 }
 
-func (decoder *efaceDecoder) Decode(ptr unsafe.Pointer, path ...string) {
+func (rdr *efaceReaderR2) Read(ptr unsafe.Pointer, path ...string) any {
 	pObj := (*interface{})(ptr)
 	obj := *pObj
 	if obj == nil {
 		*pObj = iter.Read()
-		return
+		return *pObj
 	}
 	typ := reflect2.TypeOf(obj)
 	if typ.Kind() != reflect.Ptr {
 		*pObj = iter.Read()
-		return
+		return *pObj
 	}
 	ptrType := typ.(*reflect2.UnsafePtrType)
 	ptrElemType := ptrType.Elem()
@@ -63,14 +62,15 @@ func (decoder *efaceDecoder) Decode(ptr unsafe.Pointer, path ...string) {
 		if ptrElemType.Kind() != reflect.Ptr {
 			iter.skipFourBytes('n', 'u', 'l', 'l')
 			*pObj = nil
-			return
+			return nil
 		}
 	}
 	if reflect2.IsNil(obj) {
 		obj := ptrElemType.New()
 		iter.ReadVal(obj)
 		*pObj = obj
-		return
+		return *pObj
 	}
 	iter.ReadVal(obj)
+	return obj
 }
