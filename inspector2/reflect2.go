@@ -7,6 +7,8 @@ import (
 	"github.com/modern-go/reflect2"
 )
 
+var fcache = make(map[uintptr]reflect2.StructField) // todo make me universal
+
 func diveReflect2(node any, path ...string) any {
 	if len(path) == 0 {
 		return node
@@ -24,7 +26,15 @@ func diveR2V2(typ reflect2.Type, ptr unsafe.Pointer, path ...string) any {
 	case reflect.Struct:
 		utyp := typ.(*reflect2.UnsafeStructType)
 		for i := 0; i < utyp.NumField(); i++ {
-			field := utyp.Field(i)
+			var (
+				field reflect2.StructField
+				ok    bool
+			)
+			key := utyp.RType() + uintptr(i)
+			if field, ok = fcache[key]; !ok {
+				field = utyp.Field(i)
+				fcache[key] = field
+			}
 			if field.Name() == path[0] {
 				ptr = unsafe.Pointer(uintptr(ptr) + field.Offset())
 				return diveR2V2(field.Type(), ptr, path[1:]...)
