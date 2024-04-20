@@ -1,4 +1,4 @@
-package inspector2
+package types
 
 type T struct {
 	L1 *L1
