@@ -1,7 +1,7 @@
-github.com/koykov/cbyte v1.0.3 h1:TCqUFPKBYirWqkJCQgeBZmw8pYceEEHusIOZMHVSWxg=
-github.com/koykov/cbyte v1.0.3/go.mod h1:UVUQ41KfBZyJc8igZjupM419KImFPgASqDKLZgj/sxE=
-github.com/koykov/cbytebuf v1.2.2 h1:+rzJVPVSTRpmblpj+CdfvmCwZcL23aQrINoLNiIff40=
-github.com/koykov/cbytebuf v1.2.2/go.mod h1:kk5hmkOMXeKj3pzSvVQSaBtXBhuknToZjFgAJfD3qiw=
+github.com/koykov/cbyte v1.0.4 h1:qPYgfU5y5G97WtXNPEagBCCd4qaUWbvcgbi88zhEisw=
+github.com/koykov/cbyte v1.0.4/go.mod h1:UVUQ41KfBZyJc8igZjupM419KImFPgASqDKLZgj/sxE=
+github.com/koykov/cbytebuf v1.2.3-0.20231211210825-d2d9a0a58c10 h1:BAidHEXtCaphC7TuAE6gcYBWEKALgyLvuflAxRoPZlw=
+github.com/koykov/cbytebuf v1.2.3-0.20231211210825-d2d9a0a58c10/go.mod h1:6/rTCmbfLT29AY6N/OLZV/JghhS64/TzGe35Ys9mOu0=
 github.com/koykov/fastconv v1.0.2 h1:csOWpctD9OcpkfI07LEtqtolc4TT8Y6QG3zQvkTmhrQ=
 github.com/koykov/fastconv v1.0.2/go.mod h1:9jOx5KRGe4UKHxGiDw5Yrp/qrqn2cRwH3xvFjqqCE3c=
 github.com/koykov/lbpool v1.0.2 h1:PdqlS6KzYVdHP2nBl/TIpYLPYpicHLZvPw/d8ooJSQs=
