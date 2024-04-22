@@ -10,7 +10,7 @@ import (
 func BenchmarkByteBuffer(b *testing.B) {
 	b.Run("write", func(b *testing.B) {
 		b.ReportAllocs()
-		for i := 0; i < b.N; i++ {
+		for j := 0; j < b.N; j++ {
 			var buf bytes.Buffer
 			for _, part := range parts {
 				buf.Write(part)
@@ -26,7 +26,7 @@ func BenchmarkByteBuffer(b *testing.B) {
 		b.ReportAllocs()
 		for i := 0; i < b.N; i++ {
 			var buf bytes.Buffer
-			for i := 0; i < 1000; i++ {
+			for j := 0; j < 1000; j++ {
 				buf.Write(source)
 			}
 			if !bytes.Equal(buf.Bytes(), expectedLong) {
