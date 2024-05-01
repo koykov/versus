@@ -1,10 +1,10 @@
 package dyntpl
 
 import (
+	"bytes"
 	"fmt"
+	"sync"
 	"testing"
-
-	"github.com/koykov/cbytebuf"
 
 	"github.com/koykov/dyntpl"
 	"github.com/koykov/dyntpl/testobj"
@@ -12,6 +12,16 @@ import (
 )
 
 var (
+	tplTemplate = []byte(`<html>
+	<head><title>test</title></head>
+	<body>
+		<ul>
+		{% for _, row := range d.Rows %}
+			<li>ID={%= row.ID %}, Message={%h= row.Message %}</li>
+		{% endfor %}
+		</ul>
+	</body>
+</html>`)
 	tplMarshalJSON = []byte(`{
 	"Foo": {%= d.Foo %},
 	"Bar": {%q= d.Bar %},
@@ -26,90 +36,93 @@ var (
 }`)
 	tplMarshalXML = []byte(`<MarshalData>
 	<Foo>{%= d.Foo %}</Foo>
-	<Bar>{%h= d.Bar %}</Bar>
+	<Bar>{%= d.Bar %}</Bar>
 	{% for _, r := range d.Rows %}
 		<Rows>
-			<Msg>{%h= r.Msg %}</Msg>
+			<Msg>{%= r.Msg %}</Msg>
 			<N>{%= r.N %}</N>
 		</Rows>
 	{% endfor %}
 </MarshalData>`)
+
+	dtplPool = sync.Pool{New: func() any { return &bytes.Buffer{} }}
 )
 
-func BenchmarkMarshalJSONDyntpl(b *testing.B) {
-	bench := func(b *testing.B, n int) {
-		treeJSON, _ := dyntpl.Parse(tplMarshalJSON, false)
-		treeXML, _ := dyntpl.Parse(tplMarshalXML, false)
-		dyntpl.RegisterTpl(0, "tplMarshalJSON", treeJSON)
-		dyntpl.RegisterTpl(0, "tplMarshalXML", treeXML)
-
-		b.ResetTimer()
-		b.ReportAllocs()
-
-		d := newTemplatesDataDT(n)
-		b.RunParallel(func(pb *testing.PB) {
-			buf := cbytebuf.LBAcquire()
-			ctx := dyntpl.AcquireCtx()
-			ctx.Set("d", d, &testobj_ins.MarshalDataInspector{})
-			for pb.Next() {
-				_ = dyntpl.Write(buf, "tplMarshalJSON", ctx)
-			}
-			dyntpl.ReleaseCtx(ctx)
-			cbytebuf.LBRelease(buf)
-		})
-	}
-	b.Run("1", func(b *testing.B) { bench(b, 1) })
-	b.Run("10", func(b *testing.B) { bench(b, 10) })
-	b.Run("100", func(b *testing.B) { bench(b, 100) })
-	b.Run("1000", func(b *testing.B) { bench(b, 1000) })
-}
-
-func BenchmarkMarshalXMLDyntpl(b *testing.B) {
-	bench := func(b *testing.B, n int) {
-		b.ResetTimer()
-		b.ReportAllocs()
-
-		d := newTemplatesDataDT(n)
-		b.RunParallel(func(pb *testing.PB) {
-			buf := cbytebuf.LBAcquire()
-			ctx := dyntpl.AcquireCtx()
-			ctx.Set("d", d, &testobj_ins.MarshalDataInspector{})
-			for pb.Next() {
-				_ = dyntpl.Write(buf, "tplMarshalXML", ctx)
-			}
-			dyntpl.ReleaseCtx(ctx)
-			cbytebuf.LBRelease(buf)
-		})
-	}
-	b.Run("1", func(b *testing.B) { bench(b, 1) })
-	b.Run("10", func(b *testing.B) { bench(b, 10) })
-	b.Run("100", func(b *testing.B) { bench(b, 100) })
-	b.Run("1000", func(b *testing.B) { bench(b, 1000) })
+func init() {
+	treeJSON, _ := dyntpl.Parse(tplMarshalJSON, false)
+	dyntpl.RegisterTplKey("tplMarshalJSON", treeJSON)
+	treeXML, _ := dyntpl.Parse(tplMarshalXML, false)
+	dyntpl.RegisterTplKey("tplMarshalXML", treeXML)
+	tree, _ := dyntpl.Parse(tplTemplate, false)
+	dyntpl.RegisterTplKey("tplTemplate", tree)
 }
 
 func BenchmarkDyntpl(b *testing.B) {
-	bench := func(b *testing.B, n int) {
-		tree, _ := dyntpl.Parse(tplTemplate, false)
-		dyntpl.RegisterTpl(0, "tplTemplate", tree)
+	benchJSON := func(b *testing.B, n int) {
+		b.ResetTimer()
+		b.ReportAllocs()
 
+		d := newTemplatesDataDT(n)
+		b.RunParallel(func(pb *testing.PB) {
+			for pb.Next() {
+				buf := dtplPool.Get().(*bytes.Buffer)
+				ctx := dyntpl.AcquireCtx()
+				ctx.Set("d", d, testobj_ins.MarshalDataInspector{})
+				_ = dyntpl.Write(buf, "tplMarshalJSON", ctx)
+				dyntpl.ReleaseCtx(ctx)
+				buf.Reset()
+				dtplPool.Put(buf)
+			}
+		})
+	}
+	b.Run("json/1", func(b *testing.B) { benchJSON(b, 1) })
+	b.Run("json/10", func(b *testing.B) { benchJSON(b, 10) })
+	b.Run("json/100", func(b *testing.B) { benchJSON(b, 100) })
+	b.Run("json/1000", func(b *testing.B) { benchJSON(b, 1000) })
+
+	benchXML := func(b *testing.B, n int) {
+		b.ResetTimer()
+		b.ReportAllocs()
+
+		d := newTemplatesDataDT(n)
+		b.RunParallel(func(pb *testing.PB) {
+			for pb.Next() {
+				buf := dtplPool.Get().(*bytes.Buffer)
+				ctx := dyntpl.AcquireCtx()
+				ctx.Set("d", d, testobj_ins.MarshalDataInspector{})
+				_ = dyntpl.Write(buf, "tplMarshalXML", ctx)
+				dyntpl.ReleaseCtx(ctx)
+				buf.Reset()
+				dtplPool.Put(buf)
+			}
+		})
+	}
+	b.Run("xml/1", func(b *testing.B) { benchXML(b, 1) })
+	b.Run("xml/10", func(b *testing.B) { benchXML(b, 10) })
+	b.Run("xml/100", func(b *testing.B) { benchXML(b, 100) })
+	b.Run("xml/1000", func(b *testing.B) { benchXML(b, 1000) })
+
+	benchText := func(b *testing.B, n int) {
 		b.ResetTimer()
 		b.ReportAllocs()
 
 		bench := getBenchRowsDT(n)
 		b.RunParallel(func(pb *testing.PB) {
-			buf := cbytebuf.LBAcquire()
-			ctx := dyntpl.AcquireCtx()
-			ctx.Set("bench", bench, &testobj_ins.BenchRowsInspector{})
 			for pb.Next() {
+				buf := dtplPool.Get().(*bytes.Buffer)
+				ctx := dyntpl.AcquireCtx()
+				ctx.Set("d", bench, testobj_ins.BenchRowsInspector{})
 				_ = dyntpl.Write(buf, "tplTemplate", ctx)
+				dyntpl.ReleaseCtx(ctx)
+				buf.Reset()
+				dtplPool.Put(buf)
 			}
-			dyntpl.ReleaseCtx(ctx)
-			cbytebuf.LBRelease(buf)
 		})
 	}
-	b.Run("1", func(b *testing.B) { bench(b, 1) })
-	b.Run("10", func(b *testing.B) { bench(b, 10) })
-	b.Run("100", func(b *testing.B) { bench(b, 100) })
+	b.Run("text/1", func(b *testing.B) { benchText(b, 1) })
+	b.Run("text/10", func(b *testing.B) { benchText(b, 10) })
+	b.Run("text/100", func(b *testing.B) { benchText(b, 100) })
+	b.Run("text/1000", func(b *testing.B) { benchText(b, 1000) })
 }
 
 func newTemplatesDataDT(n int) *testobj.MarshalData {

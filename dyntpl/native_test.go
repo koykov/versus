@@ -1,93 +1,91 @@
 package dyntpl
 
 import (
+	"bytes"
 	"encoding/json"
 	"encoding/xml"
+	"sync"
 	"testing"
-
-	"github.com/valyala/quicktemplate"
 )
 
-func BenchmarkMarshalJSONNative(b *testing.B) {
-	bench := func(b *testing.B, n int) {
+var nativePool = sync.Pool{New: func() any { return &bytes.Buffer{} }}
+
+func BenchmarkNative(b *testing.B) {
+	benchJSON := func(b *testing.B, n int) {
 		b.ReportAllocs()
 		d := newTemplatesDataQT(n)
 		b.RunParallel(func(pb *testing.PB) {
-			bb := quicktemplate.AcquireByteBuffer()
-			e := json.NewEncoder(bb)
 			for pb.Next() {
+				buf := nativePool.Get().(*bytes.Buffer)
+				e := json.NewEncoder(buf)
 				if err := e.Encode(d); err != nil {
 					b.Fatalf("unexpected error: %s", err)
 				}
-				bb.Reset()
+				buf.Reset()
+				nativePool.Put(buf)
 			}
-			quicktemplate.ReleaseByteBuffer(bb)
 		})
 	}
-	b.Run("1", func(b *testing.B) { bench(b, 1) })
-	b.Run("10", func(b *testing.B) { bench(b, 10) })
-	b.Run("100", func(b *testing.B) { bench(b, 100) })
-	b.Run("1000", func(b *testing.B) { bench(b, 1000) })
-}
+	b.Run("json/1", func(b *testing.B) { benchJSON(b, 1) })
+	b.Run("json/10", func(b *testing.B) { benchJSON(b, 10) })
+	b.Run("json/100", func(b *testing.B) { benchJSON(b, 100) })
+	b.Run("json/1000", func(b *testing.B) { benchJSON(b, 1000) })
 
-func BenchmarkMarshalXMLNative(b *testing.B) {
-	bench := func(b *testing.B, n int) {
+	benchXML := func(b *testing.B, n int) {
 		b.ReportAllocs()
 		d := newTemplatesDataQT(n)
 		b.RunParallel(func(pb *testing.PB) {
-			bb := quicktemplate.AcquireByteBuffer()
-			e := xml.NewEncoder(bb)
 			for pb.Next() {
+				buf := nativePool.Get().(*bytes.Buffer)
+				e := xml.NewEncoder(buf)
 				if err := e.Encode(d); err != nil {
 					b.Fatalf("unexpected error: %s", err)
 				}
-				bb.Reset()
+				buf.Reset()
+				nativePool.Put(buf)
 			}
-			quicktemplate.ReleaseByteBuffer(bb)
 		})
 	}
-	b.Run("1", func(b *testing.B) { bench(b, 1) })
-	b.Run("10", func(b *testing.B) { bench(b, 10) })
-	b.Run("100", func(b *testing.B) { bench(b, 100) })
-	b.Run("1000", func(b *testing.B) { bench(b, 1000) })
-}
+	b.Run("xml/1", func(b *testing.B) { benchXML(b, 1) })
+	b.Run("xml/10", func(b *testing.B) { benchXML(b, 10) })
+	b.Run("xml/100", func(b *testing.B) { benchXML(b, 100) })
+	b.Run("xml/1000", func(b *testing.B) { benchXML(b, 1000) })
 
-func BenchmarkMarshalHTMLNative(b *testing.B) {
-	bench := func(b *testing.B, n int) {
+	benchHTML := func(b *testing.B, n int) {
 		b.ReportAllocs()
 		rows := getBenchRowsQT(n)
 		b.RunParallel(func(pb *testing.PB) {
-			bb := quicktemplate.AcquireByteBuffer()
 			for pb.Next() {
-				if err := tpl.Execute(bb, rows); err != nil {
+				buf := nativePool.Get().(*bytes.Buffer)
+				if err := tpl.Execute(buf, rows); err != nil {
 					b.Fatalf("unexpected error: %s", err)
 				}
-				bb.Reset()
+				buf.Reset()
+				nativePool.Put(buf)
 			}
-			quicktemplate.ReleaseByteBuffer(bb)
 		})
 	}
-	b.Run("1", func(b *testing.B) { bench(b, 1) })
-	b.Run("10", func(b *testing.B) { bench(b, 10) })
-	b.Run("100", func(b *testing.B) { bench(b, 100) })
-}
+	b.Run("html/1", func(b *testing.B) { benchHTML(b, 1) })
+	b.Run("html/10", func(b *testing.B) { benchHTML(b, 10) })
+	b.Run("html/100", func(b *testing.B) { benchHTML(b, 100) })
+	b.Run("html/1000", func(b *testing.B) { benchHTML(b, 1000) })
 
-func BenchmarkMarshalTextNative(b *testing.B) {
-	bench := func(b *testing.B, n int) {
+	benchText := func(b *testing.B, n int) {
 		b.ReportAllocs()
 		rows := getBenchRowsQT(n)
 		b.RunParallel(func(pb *testing.PB) {
-			bb := quicktemplate.AcquireByteBuffer()
 			for pb.Next() {
-				if err := textTpl.Execute(bb, rows); err != nil {
+				buf := nativePool.Get().(*bytes.Buffer)
+				if err := textTpl.Execute(buf, rows); err != nil {
 					b.Fatalf("unexpected error: %s", err)
 				}
-				bb.Reset()
+				buf.Reset()
+				nativePool.Put(buf)
 			}
-			quicktemplate.ReleaseByteBuffer(bb)
 		})
 	}
-	b.Run("1", func(b *testing.B) { bench(b, 1) })
-	b.Run("10", func(b *testing.B) { bench(b, 10) })
-	b.Run("100", func(b *testing.B) { bench(b, 100) })
+	b.Run("text/1", func(b *testing.B) { benchText(b, 1) })
+	b.Run("text/10", func(b *testing.B) { benchText(b, 10) })
+	b.Run("text/100", func(b *testing.B) { benchText(b, 100) })
+	b.Run("text/1000", func(b *testing.B) { benchText(b, 1000) })
 }

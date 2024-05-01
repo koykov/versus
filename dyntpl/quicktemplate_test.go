@@ -1,67 +1,67 @@
 package dyntpl
 
 import (
+	"bytes"
 	"fmt"
+	"sync"
 	"testing"
 
-	qt "github.com/valyala/quicktemplate"
 	qtt "github.com/valyala/quicktemplate/testdata/templates"
 )
 
-func BenchmarkMarshalJSONQuickTemplate(b *testing.B) {
-	bench := func(b *testing.B, n int) {
-		b.ReportAllocs()
-		d := newTemplatesDataQT(n)
-		b.RunParallel(func(pb *testing.PB) {
-			bb := qt.AcquireByteBuffer()
-			for pb.Next() {
-				d.WriteJSON(bb)
-				bb.Reset()
-			}
-			qt.ReleaseByteBuffer(bb)
-		})
-	}
-	b.Run("1", func(b *testing.B) { bench(b, 1) })
-	b.Run("10", func(b *testing.B) { bench(b, 10) })
-	b.Run("100", func(b *testing.B) { bench(b, 100) })
-	b.Run("1000", func(b *testing.B) { bench(b, 1000) })
-}
-
-func BenchmarkMarshalXMLQuickTemplate(b *testing.B) {
-	bench := func(b *testing.B, n int) {
-		b.ReportAllocs()
-		d := newTemplatesDataQT(n)
-		b.RunParallel(func(pb *testing.PB) {
-			bb := qt.AcquireByteBuffer()
-			for pb.Next() {
-				d.WriteXML(bb)
-				bb.Reset()
-			}
-			qt.ReleaseByteBuffer(bb)
-		})
-	}
-	b.Run("1", func(b *testing.B) { bench(b, 1) })
-	b.Run("10", func(b *testing.B) { bench(b, 10) })
-	b.Run("100", func(b *testing.B) { bench(b, 100) })
-	b.Run("1000", func(b *testing.B) { bench(b, 1000) })
-}
+var qtplPool = sync.Pool{New: func() any { return &bytes.Buffer{} }}
 
 func BenchmarkQuickTemplate(b *testing.B) {
-	bench := func(b *testing.B, n int) {
+	benchJSON := func(b *testing.B, n int) {
+		b.ReportAllocs()
+		d := newTemplatesDataQT(n)
+		b.RunParallel(func(pb *testing.PB) {
+			for pb.Next() {
+				buf := qtplPool.Get().(*bytes.Buffer)
+				d.WriteJSON(buf)
+				buf.Reset()
+				qtplPool.Put(buf)
+			}
+		})
+	}
+	b.Run("json/1", func(b *testing.B) { benchJSON(b, 1) })
+	b.Run("json/10", func(b *testing.B) { benchJSON(b, 10) })
+	b.Run("json/100", func(b *testing.B) { benchJSON(b, 100) })
+	b.Run("json/1000", func(b *testing.B) { benchJSON(b, 1000) })
+
+	benchXML := func(b *testing.B, n int) {
+		b.ReportAllocs()
+		d := newTemplatesDataQT(n)
+		b.RunParallel(func(pb *testing.PB) {
+			for pb.Next() {
+				buf := qtplPool.Get().(*bytes.Buffer)
+				d.WriteXML(buf)
+				buf.Reset()
+				qtplPool.Put(buf)
+			}
+		})
+	}
+	b.Run("xml/1", func(b *testing.B) { benchXML(b, 1) })
+	b.Run("xml/10", func(b *testing.B) { benchXML(b, 10) })
+	b.Run("xml/100", func(b *testing.B) { benchXML(b, 100) })
+	b.Run("xml/1000", func(b *testing.B) { benchXML(b, 1000) })
+
+	benchText := func(b *testing.B, n int) {
 		b.ReportAllocs()
 		rows := getBenchRowsQT(n)
 		b.RunParallel(func(pb *testing.PB) {
-			bb := qt.AcquireByteBuffer()
 			for pb.Next() {
-				qtt.WriteBenchPage(bb, rows)
-				bb.Reset()
+				buf := qtplPool.Get().(*bytes.Buffer)
+				qtt.WriteBenchPage(buf, rows)
+				buf.Reset()
+				qtplPool.Put(buf)
 			}
-			qt.ReleaseByteBuffer(bb)
 		})
 	}
-	b.Run("1", func(b *testing.B) { bench(b, 1) })
-	b.Run("10", func(b *testing.B) { bench(b, 10) })
-	b.Run("100", func(b *testing.B) { bench(b, 100) })
+	b.Run("text/1", func(b *testing.B) { benchText(b, 1) })
+	b.Run("text/10", func(b *testing.B) { benchText(b, 10) })
+	b.Run("text/100", func(b *testing.B) { benchText(b, 100) })
+	b.Run("text/1000", func(b *testing.B) { benchText(b, 1000) })
 }
 
 func newTemplatesDataQT(n int) *qtt.MarshalData {

@@ -13,20 +13,8 @@ import (
 )
 
 var (
-	tpl         = template.Must(template.ParseFiles("tpl/bench.tpl"))
-	textTpl     = tt.Must(tt.ParseFiles("tpl/bench.tpl"))
-	tplTemplate = []byte(`<html>
-	<head><title>test</title></head>
-	<body>
-		<ul>
-		{% for _, row := range bench.Rows %}
-			{% if row.Print == true %}
-				<li>ID={%= row.ID %}, Message={%h= row.Message %}</li>
-			{% endif %}
-		{% endfor %}
-		</ul>
-	</body>
-</html>`)
+	tpl     = template.Must(template.ParseFiles("tpl/bench.tpl"))
+	textTpl = tt.Must(tt.ParseFiles("tpl/bench.tpl"))
 )
 
 func init() {
