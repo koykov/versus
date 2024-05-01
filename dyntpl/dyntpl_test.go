@@ -17,7 +17,7 @@ var (
 	<body>
 		<ul>
 		{% for _, row := range d.Rows %}
-			<li>ID={%= row.ID %}, Message={%h= row.Message %}</li>
+			<li>ID={%= row.ID %}, Message={%= row.Message %}</li>
 		{% endfor %}
 		</ul>
 	</body>

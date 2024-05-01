@@ -11,10 +11,10 @@ BenchmarkDyntpl/xml/1-8             	 6889815	     184.0 ns/op	       0 B/op	   
 BenchmarkDyntpl/xml/10-8            	 1628126	     723.5 ns/op	       0 B/op	       0 allocs/op
 BenchmarkDyntpl/xml/100-8           	  172864	      6559 ns/op	       0 B/op	       0 allocs/op
 BenchmarkDyntpl/xml/1000-8          	   17310	     67661 ns/op	       6 B/op	       0 allocs/op
-BenchmarkDyntpl/text/1-8            	 7593898	     154.4 ns/op	       0 B/op	       0 allocs/op
-BenchmarkDyntpl/text/10-8           	  936313	      1125 ns/op	       0 B/op	       0 allocs/op
-BenchmarkDyntpl/text/100-8          	  109921	     10235 ns/op	       1 B/op	       0 allocs/op
-BenchmarkDyntpl/text/1000-8         	   10000	    104305 ns/op	      60 B/op	       0 allocs/op
+BenchmarkDyntpl/text/1-8                 9159510         124.9 ns/op           0 B/op          0 allocs/op
+BenchmarkDyntpl/text/10-8                1703347         703.1 ns/op           0 B/op          0 allocs/op
+BenchmarkDyntpl/text/100-8                177800          6436 ns/op           0 B/op          0 allocs/op
+BenchmarkDyntpl/text/1000-8                18267         71654 ns/op          32 B/op          0 allocs/op
 BenchmarkNative/json/1-8            	12114262	     99.88 ns/op	       0 B/op	       0 allocs/op
 BenchmarkNative/json/10-8           	 3485714	     347.3 ns/op	       0 B/op	       0 allocs/op
 BenchmarkNative/json/100-8          	  436262	      2679 ns/op	       0 B/op	       0 allocs/op
