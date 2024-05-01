@@ -24,11 +24,11 @@ var (
 </html>`)
 	tplMarshalJSON = []byte(`{
 	"Foo": {%= d.Foo %},
-	"Bar": {%q= d.Bar %},
+	"Bar": "{%j= d.Bar %}",
 	"Rows":[
 		{% for _, r := range d.Rows separator , %}
 			{
-				"Msg": {%q= r.Msg %},
+				"Msg": "{%j= r.Msg %}",
 				"N": {%= r.N %}
 			}
 		{% endfor %}
