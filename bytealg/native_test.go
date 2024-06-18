@@ -5,7 +5,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/koykov/fastconv"
+	"github.com/koykov/byteconv"
 )
 
 func BenchmarkNative(b *testing.B) {
@@ -14,7 +14,7 @@ func BenchmarkNative(b *testing.B) {
 		for i := 0; i < b.N; i++ {
 			r := bytes.Trim(trimOrigin, trimCutStr)
 			if !bytes.Equal(r, trimExpect) {
-				b.Errorf(`Trim: mismatch result %s and expectation %s`, fastconv.B2S(r), fastconv.B2S(trimExpect))
+				b.Errorf(`Trim: mismatch result %s and expectation %s`, byteconv.B2S(r), byteconv.B2S(trimExpect))
 			}
 		}
 	})
