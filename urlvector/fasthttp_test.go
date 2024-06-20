@@ -3,7 +3,7 @@ package urlvector
 import (
 	"testing"
 
-	"github.com/koykov/fastconv"
+	"github.com/koykov/byteconv"
 	"github.com/valyala/fasthttp"
 )
 
@@ -27,7 +27,7 @@ func benchFastHTTP(b *testing.B, s string) {
 	b.RunParallel(func(pb *testing.PB) {
 		for pb.Next() {
 			u := fasthttp.AcquireURI()
-			_ = u.Parse(host, fastconv.S2B(s))
+			_ = u.Parse(host, byteconv.S2B(s))
 			_ = u.QueryArgs()
 			fasthttp.ReleaseURI(u)
 		}

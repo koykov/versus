@@ -29,7 +29,7 @@ func benchNetUrl(b *testing.B, s string) {
 // 		b.ReportAllocs()
 // 		b.SetBytes(int64(len(url0)))
 // 		for i := 0; i < b.N; i++ {
-// 			u, err := url.Parse(fastconv.B2S(url0))
+// 			u, err := url.Parse(byteconv.B2S(url0))
 // 			if err != nil {
 // 				b.Error(err)
 // 			}
@@ -58,7 +58,7 @@ func benchNetUrl(b *testing.B, s string) {
 // 		b.ReportAllocs()
 // 		b.SetBytes(int64(len(url0)))
 // 		for i := 0; i < b.N; i++ {
-// 			u, err := url.Parse(fastconv.B2S(url0))
+// 			u, err := url.Parse(byteconv.B2S(url0))
 // 			if err != nil {
 // 				b.Error(err)
 // 			}
@@ -85,7 +85,7 @@ func benchNetUrl(b *testing.B, s string) {
 // 		b.ReportAllocs()
 // 		b.SetBytes(int64(len(url0)))
 // 		for i := 0; i < b.N; i++ {
-// 			u, err := url.Parse(fastconv.B2S(url0))
+// 			u, err := url.Parse(byteconv.B2S(url0))
 // 			if err != nil {
 // 				b.Error(err)
 // 			}
@@ -100,7 +100,7 @@ func benchNetUrl(b *testing.B, s string) {
 // 		b.ReportAllocs()
 // 		b.SetBytes(int64(len(url0)))
 // 		for i := 0; i < b.N; i++ {
-// 			u, err := url.Parse(fastconv.B2S(url0))
+// 			u, err := url.Parse(byteconv.B2S(url0))
 // 			if err != nil {
 // 				b.Error(err)
 // 			}
