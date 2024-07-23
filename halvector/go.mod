@@ -3,7 +3,7 @@ module github.com/koykov/versus/halvector
 go 1.22.0
 
 require (
-	github.com/koykov/halvector v1.0.6
+	github.com/koykov/halvector v1.0.7
 	github.com/koykov/vector v1.2.7-0.20240506200014-d7875d4bd914
 )
 
