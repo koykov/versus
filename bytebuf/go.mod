@@ -2,7 +2,7 @@ module github.com/koykov/versus/bytebuf
 
 go 1.18
 
-require github.com/koykov/bytebuf v1.0.7-0.20240511211320-6e2d75541601
+require github.com/koykov/bytebuf v1.0.8
 
 require (
 	github.com/koykov/bytealg v1.0.4 // indirect
