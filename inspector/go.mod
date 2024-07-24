@@ -3,7 +3,7 @@ module github.com/koykov/versus/inspector
 go 1.18
 
 require (
-	github.com/koykov/inspector v1.4.6-0.20240528160109-ff10511497f3
+	github.com/koykov/inspector v1.4.6
 	github.com/modern-go/reflect2 v1.0.2
 )
 
