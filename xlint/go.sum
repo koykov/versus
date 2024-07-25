@@ -1,5 +1,5 @@
-github.com/google/uuid v1.5.0 h1:1p67kYwdtXjb0gL0BPiP1Av9wiZPo5A8z2cWkTZ+eyU=
-github.com/google/uuid v1.5.0/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+yHo=
+github.com/google/uuid v1.6.0 h1:NIvaJDMOsjHA8n1jAhLSgzrAzy1Hgr+hNrb57e+94F0=
+github.com/google/uuid v1.6.0/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+yHo=
 github.com/koykov/bytealg v1.0.2 h1:e9le4zkWnK9o1dsjlEtIPjC4JuHof+w0XsyOnYGLOvs=
 github.com/koykov/bytealg v1.0.2/go.mod h1:3jLF2zTF1XO+E9dyodNDd3kWyhavUdVUXaIwqPkikB0=
 github.com/koykov/byteseq v0.0.0-20230330194259-68973f3b765a h1:2q77e/w+8RE5VwIaR2KwcF4f+PqEemrgOiRA/xhM7S4=
