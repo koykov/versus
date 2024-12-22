@@ -5,6 +5,7 @@ import (
 
 	jellyfish "github.com/jamesturk/go-jellyfish"
 	"github.com/koykov/bytefuzz/levenshtein"
+	"github.com/koykov/bytefuzz/levenshtein2"
 )
 
 func BenchmarkLevenshtein(b *testing.B) {
@@ -101,6 +102,18 @@ func BenchmarkLevenshtein(b *testing.B) {
 			b.Run(st.text, func(b *testing.B) {
 				b.ReportAllocs()
 				ctx := levenshtein.Acquire()
+				for i := 0; i < b.N; i++ {
+					ctx.Reset()
+					ctx.DistanceString(st.text, st.target)
+				}
+			})
+		}
+	})
+	b.Run("bytefuzz/2", func(b *testing.B) {
+		for _, st := range stages {
+			b.Run(st.text, func(b *testing.B) {
+				b.ReportAllocs()
+				ctx := levenshtein2.Acquire()
 				for i := 0; i < b.N; i++ {
 					ctx.Reset()
 					ctx.DistanceString(st.text, st.target)
