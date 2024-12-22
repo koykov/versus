@@ -102,6 +102,7 @@ func BenchmarkLevenshtein(b *testing.B) {
 			b.Run(st.text, func(b *testing.B) {
 				b.ReportAllocs()
 				ctx := levenshtein.Acquire()
+				defer levenshtein.Release(ctx)
 				for i := 0; i < b.N; i++ {
 					ctx.Reset()
 					ctx.DistanceString(st.text, st.target)
@@ -114,6 +115,7 @@ func BenchmarkLevenshtein(b *testing.B) {
 			b.Run(st.text, func(b *testing.B) {
 				b.ReportAllocs()
 				ctx := levenshtein2.Acquire()
+				defer levenshtein2.Release(ctx)
 				for i := 0; i < b.N; i++ {
 					ctx.Reset()
 					ctx.DistanceString(st.text, st.target)
