@@ -1,0 +1,10 @@
+github.com/jamesturk/go-jellyfish v0.0.0-20190821175037-81d50ddab23b h1:Neiyfj2+1A3T8Rb/kZqKjT0htCrV7E+11ug4YAIgd00=
+github.com/jamesturk/go-jellyfish v0.0.0-20190821175037-81d50ddab23b/go.mod h1:NWgB486zJYWnPz6/Agaue5rNn24YE31xOSxqrdfml4E=
+github.com/koykov/byteconv v1.0.1 h1:5Yb6++P+HnipDW/V9rHXR7CyS0ZFncspT4isvt65fFA=
+github.com/koykov/byteconv v1.0.1/go.mod h1:viZknv/akQJrXOQS3bZu2U7TE+gjA03LFQpSsRExZR4=
+github.com/koykov/bytefuzz v0.0.0-20241221192222-37a7652ccb50 h1:s0RGuCHVUy+pKM7y0D3gXsVwTaL4doVxssQJMX09fWc=
+github.com/koykov/bytefuzz v0.0.0-20241221192222-37a7652ccb50/go.mod h1:4TLExHVVFpqLH7ls869Ye6IUo+HrYfQ0Ix2h+5XzT6I=
+github.com/koykov/openrt v0.0.0-20240728195600-ccc3242946f9 h1:BZvoBH5eeWfqd74OnY4G3u81zPl52mYg2rF9I2dM0cE=
+github.com/koykov/openrt v0.0.0-20240728195600-ccc3242946f9/go.mod h1:y8Xa99HTBmthCilUUW36IZJd5SP9Rb+W8S9CJaauyU8=
+golang.org/x/text v0.21.0 h1:zyQAAkrwaneQ066sspRyJaG9VNi/YJ1NfzcGB3hZ/qo=
+golang.org/x/text v0.21.0/go.mod h1:4IBbMaMmOPCJ8SecivzSH54+73PCFmPWxNTLm+vZkEQ=
