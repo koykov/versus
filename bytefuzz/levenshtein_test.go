@@ -3,7 +3,7 @@ package bytefuzz
 import (
 	"testing"
 
-	jellyfish "github.com/jamesturk/go-jellyfish"
+	"github.com/jamesturk/go-jellyfish"
 	"github.com/koykov/bytefuzz/levenshtein"
 	"github.com/koykov/bytefuzz/levenshtein2"
 )
