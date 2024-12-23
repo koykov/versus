@@ -18,11 +18,12 @@ func BenchmarkHamming(b *testing.B) {
 		{"", "G", 1},
 		{"G", "", 1},
 	}
-	b.Run("hamming", func(b *testing.B) {
+	b.Run("bytefuzz", func(b *testing.B) {
 		for _, st := range stages {
 			b.Run(st.text, func(b *testing.B) {
 				b.ReportAllocs()
 				ctx := hamming.Acquire()
+				defer hamming.Release(ctx)
 				for i := 0; i < b.N; i++ {
 					ctx.Reset()
 					ctx.DistanceString(st.text, st.target)
