@@ -3,6 +3,7 @@ module github.com/koykov/versus/jsonvector
 go 1.18
 
 require (
+	github.com/buger/jsonparser v1.1.1
 	github.com/koykov/byteconv v1.0.0
 	github.com/koykov/jsonvector v1.2.5
 	github.com/koykov/vector v1.2.7-0.20240506200014-d7875d4bd914
