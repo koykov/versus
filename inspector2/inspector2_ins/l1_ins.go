@@ -560,7 +560,7 @@ func (i0 L1Inspector) Capacity(src any, result *int, path ...string) error {
 	return nil
 }
 
-func (i0 L1Inspector) Reset(x any) error {
+func (i0 L1Inspector) Reset(x any, _ ...string) error {
 	var origin *types.L1
 	_ = origin
 	switch x.(type) {

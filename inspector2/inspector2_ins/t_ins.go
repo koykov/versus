@@ -645,7 +645,7 @@ func (i3 TInspector) Capacity(src any, result *int, path ...string) error {
 	return nil
 }
 
-func (i3 TInspector) Reset(x any) error {
+func (i3 TInspector) Reset(x any, _ ...string) error {
 	var origin *types.T
 	_ = origin
 	switch x.(type) {

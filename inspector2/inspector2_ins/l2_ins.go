@@ -475,7 +475,7 @@ func (i1 L2Inspector) Capacity(src any, result *int, path ...string) error {
 	return nil
 }
 
-func (i1 L2Inspector) Reset(x any) error {
+func (i1 L2Inspector) Reset(x any, _ ...string) error {
 	var origin *types.L2
 	_ = origin
 	switch x.(type) {
