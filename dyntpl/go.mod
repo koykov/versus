@@ -3,7 +3,7 @@ module github.com/koykov/versus/dyntpl
 go 1.18
 
 require (
-	github.com/koykov/dyntpl v1.1.11
+	github.com/koykov/dyntpl v1.1.12-0.20251130192230-c33dd39fd5b7
 	github.com/valyala/quicktemplate v1.8.0
 )
 
