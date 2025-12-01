@@ -22,6 +22,13 @@ func (i1 L2Inspector) TypeName() string {
 	return "L2"
 }
 
+func (i1 L2Inspector) Instance(ptr bool) any {
+	if ptr {
+		return &types.L2{}
+	}
+	return types.L2{}
+}
+
 func (i1 L2Inspector) Get(src any, path ...string) (any, error) {
 	var buf any
 	err := i1.GetTo(src, &buf, path...)
@@ -475,7 +482,35 @@ func (i1 L2Inspector) Capacity(src any, result *int, path ...string) error {
 	return nil
 }
 
-func (i1 L2Inspector) Reset(x any, _ ...string) error {
+func (i1 L2Inspector) Append(src, value any, path ...string) (any, error) {
+	_, _, _ = src, value, path
+	if src == nil {
+		return src, nil
+	}
+	var x *types.L2
+	_ = x
+	if p, ok := src.(**types.L2); ok {
+		x = *p
+	} else if p, ok := src.(*types.L2); ok {
+		x = p
+	} else if v, ok := src.(types.L2); ok {
+		x = &v
+	} else {
+		return src, nil
+	}
+
+	return src, nil
+}
+
+func (i1 L2Inspector) Reset(x any, path ...string) error {
+	if len(path) == 0 {
+		return i1.reset1(x, path...)
+	} else {
+		return i1.reset2(x, path...)
+	}
+}
+
+func (i1 L2Inspector) reset1(x any, path ...string) error {
 	var origin *types.L2
 	_ = origin
 	switch x.(type) {
@@ -492,6 +527,39 @@ func (i1 L2Inspector) Reset(x any, _ ...string) error {
 		origin.L3.S = ""
 		origin.L3.I = 0
 		origin.L3.F = 0
+	}
+	return nil
+}
+
+func (i1 L2Inspector) reset2(x any, path ...string) error {
+	var origin *types.L2
+	_ = origin
+	switch x.(type) {
+	case types.L2:
+		return inspector.ErrMustPointerType
+	case *types.L2:
+		origin = x.(*types.L2)
+	case **types.L2:
+		origin = *x.(**types.L2)
+	default:
+		return inspector.ErrUnsupportedType
+	}
+	if len(path) > 0 {
+		if path[0] == "L3" {
+			if origin.L3 != nil {
+				if len(path) > 1 {
+					if path[1] == "S" {
+						origin.L3.S = ""
+					}
+					if path[1] == "I" {
+						origin.L3.I = 0
+					}
+					if path[1] == "F" {
+						origin.L3.F = 0
+					}
+				}
+			}
+		}
 	}
 	return nil
 }

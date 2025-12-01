@@ -22,6 +22,13 @@ func (i0 L1Inspector) TypeName() string {
 	return "L1"
 }
 
+func (i0 L1Inspector) Instance(ptr bool) any {
+	if ptr {
+		return &types.L1{}
+	}
+	return types.L1{}
+}
+
 func (i0 L1Inspector) Get(src any, path ...string) (any, error) {
 	var buf any
 	err := i0.GetTo(src, &buf, path...)
@@ -560,7 +567,35 @@ func (i0 L1Inspector) Capacity(src any, result *int, path ...string) error {
 	return nil
 }
 
-func (i0 L1Inspector) Reset(x any, _ ...string) error {
+func (i0 L1Inspector) Append(src, value any, path ...string) (any, error) {
+	_, _, _ = src, value, path
+	if src == nil {
+		return src, nil
+	}
+	var x *types.L1
+	_ = x
+	if p, ok := src.(**types.L1); ok {
+		x = *p
+	} else if p, ok := src.(*types.L1); ok {
+		x = p
+	} else if v, ok := src.(types.L1); ok {
+		x = &v
+	} else {
+		return src, nil
+	}
+
+	return src, nil
+}
+
+func (i0 L1Inspector) Reset(x any, path ...string) error {
+	if len(path) == 0 {
+		return i0.reset1(x, path...)
+	} else {
+		return i0.reset2(x, path...)
+	}
+}
+
+func (i0 L1Inspector) reset1(x any, path ...string) error {
 	var origin *types.L1
 	_ = origin
 	switch x.(type) {
@@ -578,6 +613,45 @@ func (i0 L1Inspector) Reset(x any, _ ...string) error {
 			origin.L2.L3.S = ""
 			origin.L2.L3.I = 0
 			origin.L2.L3.F = 0
+		}
+	}
+	return nil
+}
+
+func (i0 L1Inspector) reset2(x any, path ...string) error {
+	var origin *types.L1
+	_ = origin
+	switch x.(type) {
+	case types.L1:
+		return inspector.ErrMustPointerType
+	case *types.L1:
+		origin = x.(*types.L1)
+	case **types.L1:
+		origin = *x.(**types.L1)
+	default:
+		return inspector.ErrUnsupportedType
+	}
+	if len(path) > 0 {
+		if path[0] == "L2" {
+			if origin.L2 != nil {
+				if len(path) > 1 {
+					if path[1] == "L3" {
+						if origin.L2.L3 != nil {
+							if len(path) > 2 {
+								if path[2] == "S" {
+									origin.L2.L3.S = ""
+								}
+								if path[2] == "I" {
+									origin.L2.L3.I = 0
+								}
+								if path[2] == "F" {
+									origin.L2.L3.F = 0
+								}
+							}
+						}
+					}
+				}
+			}
 		}
 	}
 	return nil

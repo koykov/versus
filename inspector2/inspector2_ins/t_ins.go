@@ -22,6 +22,13 @@ func (i3 TInspector) TypeName() string {
 	return "T"
 }
 
+func (i3 TInspector) Instance(ptr bool) any {
+	if ptr {
+		return &types.T{}
+	}
+	return types.T{}
+}
+
 func (i3 TInspector) Get(src any, path ...string) (any, error) {
 	var buf any
 	err := i3.GetTo(src, &buf, path...)
@@ -645,7 +652,35 @@ func (i3 TInspector) Capacity(src any, result *int, path ...string) error {
 	return nil
 }
 
-func (i3 TInspector) Reset(x any, _ ...string) error {
+func (i3 TInspector) Append(src, value any, path ...string) (any, error) {
+	_, _, _ = src, value, path
+	if src == nil {
+		return src, nil
+	}
+	var x *types.T
+	_ = x
+	if p, ok := src.(**types.T); ok {
+		x = *p
+	} else if p, ok := src.(*types.T); ok {
+		x = p
+	} else if v, ok := src.(types.T); ok {
+		x = &v
+	} else {
+		return src, nil
+	}
+
+	return src, nil
+}
+
+func (i3 TInspector) Reset(x any, path ...string) error {
+	if len(path) == 0 {
+		return i3.reset1(x, path...)
+	} else {
+		return i3.reset2(x, path...)
+	}
+}
+
+func (i3 TInspector) reset1(x any, path ...string) error {
 	var origin *types.T
 	_ = origin
 	switch x.(type) {
@@ -664,6 +699,51 @@ func (i3 TInspector) Reset(x any, _ ...string) error {
 				origin.L1.L2.L3.S = ""
 				origin.L1.L2.L3.I = 0
 				origin.L1.L2.L3.F = 0
+			}
+		}
+	}
+	return nil
+}
+
+func (i3 TInspector) reset2(x any, path ...string) error {
+	var origin *types.T
+	_ = origin
+	switch x.(type) {
+	case types.T:
+		return inspector.ErrMustPointerType
+	case *types.T:
+		origin = x.(*types.T)
+	case **types.T:
+		origin = *x.(**types.T)
+	default:
+		return inspector.ErrUnsupportedType
+	}
+	if len(path) > 0 {
+		if path[0] == "L1" {
+			if origin.L1 != nil {
+				if len(path) > 1 {
+					if path[1] == "L2" {
+						if origin.L1.L2 != nil {
+							if len(path) > 2 {
+								if path[2] == "L3" {
+									if origin.L1.L2.L3 != nil {
+										if len(path) > 3 {
+											if path[3] == "S" {
+												origin.L1.L2.L3.S = ""
+											}
+											if path[3] == "I" {
+												origin.L1.L2.L3.I = 0
+											}
+											if path[3] == "F" {
+												origin.L1.L2.L3.F = 0
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
 			}
 		}
 	}
