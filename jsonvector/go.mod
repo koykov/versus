@@ -6,7 +6,7 @@ require (
 	github.com/bytedance/sonic v1.14.2
 	github.com/koykov/byteconv v1.0.1
 	github.com/koykov/jsonvector v1.2.7
-	github.com/koykov/vector v1.2.7
+	github.com/koykov/vector v1.2.8-0.20251202204859-d65db201c23f
 	github.com/minio/simdjson-go v0.4.5
 	github.com/valyala/fastjson v1.6.4
 )
@@ -22,8 +22,8 @@ require (
 	github.com/koykov/byteseq v1.0.2 // indirect
 	github.com/koykov/entry v1.0.2 // indirect
 	github.com/koykov/indirect v1.0.1 // indirect
-	github.com/koykov/openrt v0.0.0-20240728195600-ccc3242946f9 // indirect
+	github.com/koykov/simd v0.0.6 // indirect
 	github.com/twitchyliquid64/golang-asm v0.15.1 // indirect
 	golang.org/x/arch v0.0.0-20210923205945-b76863e36670 // indirect
-	golang.org/x/sys v0.22.0 // indirect
+	golang.org/x/sys v0.30.0 // indirect
 )
