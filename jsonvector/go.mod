@@ -5,7 +5,7 @@ go 1.18
 require (
 	github.com/bytedance/sonic v1.14.2
 	github.com/koykov/byteconv v1.0.1
-	github.com/koykov/jsonvector v1.2.8-0.20260102122935-d7c6f2dab628
+	github.com/koykov/jsonvector v1.2.8
 	github.com/koykov/vector v1.2.9
 	github.com/minio/simdjson-go v0.4.5
 	github.com/valyala/fastjson v1.6.7
