@@ -10,7 +10,7 @@ import (
 
 func TestParseJsonvector(t *testing.T) {
 	p := jsonvector.Acquire()
-	err := p.ParseStr(mediumFixture)
+	err := p.ParseString(mediumFixture)
 	if err != nil {
 		t.Error(err)
 	}
@@ -44,13 +44,13 @@ func benchJsonvector(b *testing.B, s string) {
 	b.RunParallel(func(pb *testing.PB) {
 		for pb.Next() {
 			p := jsonvector.Acquire()
-			err := p.ParseStr(s)
+			err := p.ParseString(s)
 			if err != nil {
 				panic(fmt.Errorf("unexpected error: %s", err))
 			}
 			v := p.Get()
-			if v.Type() != vector.TypeObj {
-				panic(fmt.Errorf("unexpected value type; got %d; want %d", v.Type(), vector.TypeObj))
+			if v.Type() != vector.TypeObject {
+				panic(fmt.Errorf("unexpected value type; got %d; want %d", v.Type(), vector.TypeObject))
 			}
 			jsonvector.ReleaseNC(p)
 		}
