@@ -4,7 +4,7 @@ go 1.25.4
 
 require (
 	github.com/VictoriaMetrics/metrics v1.40.2
-	github.com/koykov/vmchain v0.0.0-20260204180602-f6e563b61cba
+	github.com/koykov/vmchain v0.0.0-20260205195730-c30ca69d1653
 )
 
 require (
